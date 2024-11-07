@@ -9,7 +9,7 @@ class World {
         new Cloud()
     ];
     backgroundObjects = [
-        new BackgroundObject('./img/5_background/layers/1_first_layer/1.png'),
+        new BackgroundObject('./img/5_background/layers/3_third_layer/1.png'),
     ];
     canvas;
     ctx;
@@ -24,22 +24,20 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.backgroundObjects.forEach(bgo => {
-            this.addToMap(bgo);
-        });
-
         this.addToMap(this.character);
-        this.enemies.forEach(enemy => {
-            this.addToMap(enemy);
-        });
-
-        this.clouds.forEach(cloud => {
-            this.addToMap(cloud);
-        });
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.clouds);
 
         let self = this;
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
             self.draw();
+        });
+    }
+
+    addObjectsToMap(objects){
+        objects.forEach(o => {
+            this.addToMap(o);
         });
     }
 
