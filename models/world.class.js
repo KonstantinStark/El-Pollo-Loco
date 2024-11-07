@@ -26,14 +26,12 @@ class World {
         this.draw();
     }
 
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
         this.addObjectsToMap(this.clouds);
-       
 
         let self = this;
         requestAnimationFrame(function () {
@@ -41,7 +39,7 @@ class World {
         });
     }
 
-    addObjectsToMap(objects){
+    addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });

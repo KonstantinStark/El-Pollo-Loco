@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Taco';
+    src: url('../fonts/Tacos de Tijuana.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Tequila';
+    src: url('../fonts/La Tequila Out.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Tequila2';
+    src: url('../fonts/La Tequila.ttf') format('truetype');
+}
