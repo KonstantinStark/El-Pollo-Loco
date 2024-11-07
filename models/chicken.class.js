@@ -1,14 +1,3 @@
-class Chicken {
-    x;
-    y;
+class Chicken extends MovableObject {
 
-
-
-    moveRight(){
-
-    }
-
-    jump(){
-
-    }
 }
