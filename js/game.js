@@ -5,43 +5,43 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas);
+    world = new World(canvas, keyboard);
 
     console.log('My Character is', world.character);
 }
 
 window.addEventListener('keypress', (event) => {
-    if (event.key === 'A') {
-        keyboard.a = true;
+    if (event.key === 'a') {
+        keyboard.A = true;
     }
 
-    if (event.key === 'D') {
-        keyboard.d = true;
+    if (event.key === 'd') {
+        keyboard.D = true;
     }
 
-    if (event.key === 'E') {
-        keyboard.e = true;
+    if (event.key === 'e') {
+        keyboard.E = true;
     }
 
     if (event.key === ' ') {
-        keyboard.space = true;
+        keyboard.SPACE = true;
     }
 });
 
 window.addEventListener('keyup', (event) => {
-    if (event.key === 'A') {
-        keyboard.a = false;
+    if (event.key === 'a') {
+        keyboard.A = false;
     }
 
-    if (event.key === 'D') {
-        keyboard.d = false;
+    if (event.key === 'd') {
+        keyboard.D = false;
     }
 
-    if (event.key === 'E') {
-        keyboard.e = false;
+    if (event.key === 'e') {
+        keyboard.E = false;
     }
 
     if (event.key === ' ') {
-        keyboard.space = false;
+        keyboard.SPACE = false;
     }
 });
