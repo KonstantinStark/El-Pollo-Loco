@@ -26,6 +26,22 @@ window.addEventListener('keypress', (event) => {
     if (event.key === ' ') {
         keyboard.space = true;
     }
+});
 
-    console.log(event);
+window.addEventListener('keyup', (event) => {
+    if (event.key === 'A') {
+        keyboard.a = false;
+    }
+
+    if (event.key === 'D') {
+        keyboard.d = false;
+    }
+
+    if (event.key === 'E') {
+        keyboard.e = false;
+    }
+
+    if (event.key === ' ') {
+        keyboard.space = false;
+    }
 });
