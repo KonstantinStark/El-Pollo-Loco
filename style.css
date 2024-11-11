@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Tequila2';
+    font-family: 'MexicanTequila';
     background-image: url('./img/5_background/layers/air.png');
 }
 
@@ -13,13 +13,10 @@ canvas {
 }
 
 h1 {
-    padding-top: 40px;
-    padding-bottom: 50px;
-    color: rgb(255, 208, 0);
-    font-size: 50px;
+    font-weight: 100;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    color: #ffee00;
+    font-size: 80px;
     text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
 }
-
-/* width: 100%;
-    max-width: 1280px;
-    height: 576px; */

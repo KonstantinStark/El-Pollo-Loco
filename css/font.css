@@ -12,3 +12,18 @@
     font-family: 'Tequila2';
     src: url('../fonts/La Tequila.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Taco';
+    src: url('../fonts/TACOBOX_.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'gilgongo';
+    src: url('../gilgongo.tiki.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MexicanTequila';
+    src: url('../fonts/MexicanTequila.ttf');
+}
