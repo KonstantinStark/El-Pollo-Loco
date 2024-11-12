@@ -13,7 +13,7 @@ class Endboss extends MovableObject {
     ];
 
     constructor(){
-        super().loadImage(this.IMAGES_WALKING[0]); // Super 
+        super().loadImage(this.IMAGES_WALKING[0]); // Super greift auf Construter der Überklasse zu
         this.loadImages(this.IMAGES_WALKING);
         this.x = 700;
     }
