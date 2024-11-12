@@ -2,6 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+let music_sound = new Audio('./audio/music2.wav');
+music_sound.volume = 0.4;
+
+function toggleMusic() {
+    if (music_sound.paused) {
+        music_sound.play();
+    } else {
+        music_sound.pause();
+    }
+}
 
 function init() {
     canvas = document.getElementById('canvas');
