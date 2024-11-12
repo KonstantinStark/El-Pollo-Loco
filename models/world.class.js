@@ -5,6 +5,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    music_sound = new Audio('./audio/music2.wav')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
