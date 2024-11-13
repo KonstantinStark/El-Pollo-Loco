@@ -51,6 +51,10 @@ class MovableObject {
             this.y < mo.y + mo.height;
     }
 
+    hit(){
+        this.energy -= 5;
+    }
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
