@@ -1,7 +1,7 @@
 class Endboss extends MovableObject {
 
     height = 400;
-    width= 300;
+    width = 300;
     y = 55;
     x = 2500;
 
@@ -13,10 +13,10 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/2_alert/G9.png',
         './img/4_enemie_boss_chicken/2_alert/G10.png',
         './img/4_enemie_boss_chicken/2_alert/G11.png',
-        './img/4_enemie_boss_chicken/2_alert/G12.png'     
+        './img/4_enemie_boss_chicken/2_alert/G12.png'
     ];
 
-    constructor(){
+    constructor() {
         super().loadImage(this.IMAGES_WALKING[0]); // Super greift auf Construter der Überklasse zu
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
@@ -25,6 +25,6 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
-          }, 75);
+        }, 75);
     }
 }
