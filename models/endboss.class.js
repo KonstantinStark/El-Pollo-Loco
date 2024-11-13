@@ -1,5 +1,9 @@
 class Endboss extends MovableObject {
 
+    height = 400;
+    width= 300;
+    y = 55;
+    x = 2500;
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -15,6 +19,12 @@ class Endboss extends MovableObject {
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]); // Super greift auf Construter der Überklasse zu
         this.loadImages(this.IMAGES_WALKING);
-        this.x = 700;
+        this.animate();
+    }
+
+    animate() {
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_WALKING);
+          }, 75);
     }
 }
