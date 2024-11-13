@@ -39,6 +39,7 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('./audio/walk.wav')
+    jump_sound = new Audio('./audio/jump.wav')
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
@@ -85,10 +86,11 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 50);
+        }, 40);
     }
 
     jump() {
+        this.jump_sound.play();
         this.speedY = 20;
     }
 }

@@ -1,9 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-
 let music_sound = new Audio('./audio/music3.mp3');
-music_sound.volume = 0.05;
+music_sound.volume = 0.09;
 
 function toggleMusic() {
     if (music_sound.paused) {
