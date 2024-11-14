@@ -40,6 +40,7 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('./audio/walk.wav')
     jump_sound = new Audio('./audio/jump.wav')
+    loose_sound = new Audio('./audio/loose.mp3')
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
@@ -52,6 +53,8 @@ class Character extends MovableObject {
     }
 
     animate() {
+        let deadAnimation = false; 
+        let deadImage= false;
         setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
@@ -71,13 +74,21 @@ class Character extends MovableObject {
             }
 
             this.world.camera_x = -this.x + 100;
+
+            if (this.isDead() && !deadAnimation) {
+                this.playAnimation(this.IMAGES_DEAD);
+                this.showGameOverScreen(); 
+                this.img = null; 
+                deadAnimation = true; 
+                deadImage = true; 
+            } else if (deadImage) {
+                this.img = null;
+            }
+
         }, 1000 / 60);
 
-
         setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
+         if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
@@ -87,10 +98,44 @@ class Character extends MovableObject {
                 }
             }
         }, 40);
+
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+        }, 150);
     }
 
     jump() {
         this.jump_sound.play();
         this.speedY = 20;
+    }
+
+
+    showGameOverScreen() {
+        this.loose_sound.play();
+        let gameOverText = document.createElement("div");
+        gameOverText.innerHTML = "Game Over";
+        gameOverText.style.position = "absolute";
+        gameOverText.style.top = "50%";
+        gameOverText.style.left = "50%";
+        gameOverText.style.transform = "translate(-50%, -50%)";
+        gameOverText.style.fontSize = "80px";
+        gameOverText.style.color = "red";
+        gameOverText.style.zIndex = "100";
+        document.body.appendChild(gameOverText);
+
+        let tryAgainButton = document.createElement("button");
+        tryAgainButton.innerHTML = "Try Again";
+        tryAgainButton.style.position = "absolute";
+        tryAgainButton.style.top = "60%";
+        tryAgainButton.style.left = "50%";
+        tryAgainButton.style.transform = "translateX(-50%)";
+        tryAgainButton.style.fontSize = "20px";
+        document.body.appendChild(tryAgainButton);
+
+        tryAgainButton.addEventListener("click", () => {
+            window.location.reload();
+        });
     }
 }

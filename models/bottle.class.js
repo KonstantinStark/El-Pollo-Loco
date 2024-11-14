@@ -2,7 +2,6 @@ class Bottle extends MovableObject {
     y = 370;
     width = 60;
     height = 60;
-    static minDistance = 200;
 
     IMAGES_GROUND = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
@@ -30,7 +29,7 @@ class Bottle extends MovableObject {
         this.loadImages(this.IMAGES_GROUND);
         this.loadImages(this.IMAGES_ROTATE);
         this.loadImages(this.IMAGES_SPLASH);
-        this.x = 400 + Math.random() * 3000;
+        this.x = 500 + Math.random() * 3000;
     }
 
     loadImages(array) {
