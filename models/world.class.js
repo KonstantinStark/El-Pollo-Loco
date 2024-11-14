@@ -58,14 +58,14 @@ class World {
         });
     }
 
-    // checkCollisionsBottle(){
-    //     this.level.enemies.forEach((enemy) => {
-    //         if (this.character.isColliding(enemy) ) {
-    //             this.character.hit();
-    //             this.statusBarHealth.setPercentage(this.character.energy)
-    //         }
-    //     });
-    // }
+    checkCollisionsBottle(){
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) ) {
+                this.character.hit();
+                this.statusBarHealth.setPercentage(this.character.energy)
+            }
+        });
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);        
@@ -84,11 +84,10 @@ class World {
         this.addObjectsToMap(this.level.enemies);
 
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0);
         
-        
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();

@@ -56,6 +56,14 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    playRotationAnimation() {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.IMAGES_ROTATE.length;
+        const nextImage = this.imageCache[this.IMAGES_ROTATE[this.currentImageIndex]];
+        if (nextImage.complete) {
+            this.img = nextImage;
+        }
+    }
+
     moveRight() {
         this.x += this.speed;
     }
