@@ -123,6 +123,7 @@ class Character extends MovableObject {
         gameOverText.style.fontSize = "80px";
         gameOverText.style.color = "red";
         gameOverText.style.zIndex = "100";
+        gameOverText.style.textShadow = "5px 5px 10px rgba(0, 0, 0, 0.5)";
         document.body.appendChild(gameOverText);
 
         let tryAgainButton = document.createElement("button");
