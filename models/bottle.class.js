@@ -30,7 +30,7 @@ class Bottle extends MovableObject {
         this.loadImages(this.IMAGES_GROUND);
         this.loadImages(this.IMAGES_ROTATE);
         this.loadImages(this.IMAGES_SPLASH);
-        this.x = 400 + Math.random() * 1000;
+        this.x = 400 + Math.random() * 3000;
     }
 
     loadImages(array) {
