@@ -40,6 +40,7 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('./audio/walk.wav')
     jump_sound = new Audio('./audio/jump.wav')
+    throw_sound = new Audio('./audio/throw.wav')
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')

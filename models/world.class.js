@@ -5,7 +5,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusBarHealth = new StatusBarHealth();
+    statusBarCoin = new StatusBarCoin();
+    statusBarBottle = new StatusBarBottle();
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -43,25 +45,47 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) ) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy)
+                this.statusBarHealth.setPercentage(this.character.energy)
             }
         });
     }
 
+    checkCollisionsCoin(){
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin) ) {
+                this.statusBarCoin.setPercentage(this.coin.energy)
+            }
+        });
+    }
+
+    // checkCollisionsBottle(){
+    //     this.level.enemies.forEach((enemy) => {
+    //         if (this.character.isColliding(enemy) ) {
+    //             this.character.hit();
+    //             this.statusBarHealth.setPercentage(this.character.energy)
+    //         }
+    //     });
+    // }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);        
+        
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
+        
+        this.addObjectsToMap(this.level.clouds);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0);
+        
+        
 
         let self = this;
         requestAnimationFrame(function () {
