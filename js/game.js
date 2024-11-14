@@ -1,17 +1,11 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let music_sound = new Audio('./audio/music3.mp3');
+let music_sound = new Audio('./audio/music3.wav');
 let ePressed = false;
-music_sound.volume = 0.09;
-
-function toggleMusic() {
-    if (music_sound.paused) {
-        music_sound.play();
-    } else {
-        music_sound.pause();
-    }
-}
+music_sound.volume = .15;
+music_sound.loop = true; // Wiederholt die Musik kontinuierlich
+music_sound.play();
 
 function init() {
     canvas = document.getElementById('canvas');
