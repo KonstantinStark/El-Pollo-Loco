@@ -81,9 +81,7 @@ class Character extends MovableObject {
 
             if (this.isDead() && !deadAnimation) {
                 this.playAnimation(this.IMAGES_DEAD);
-                setTimeout(() => {
-                    this.showGameOverScreen();
-                }, 1000);
+                this.showGameOverScreen();
                 this.img = null;
                 deadAnimation = true;
                 deadImage = true;

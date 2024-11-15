@@ -50,13 +50,13 @@ class World {
         });
     }
 
-    checkCollisionsCoin(){
-        this.level.coins.forEach((coin) => {
-            if (this.character.isColliding(coin) ) {
-                this.statusBarCoin.setPercentage(this.coin.energy)
-            }
-        });
-    }
+    checkCollisionsCoin() {
+    this.level.coins.forEach((coin) => {
+        if (this.character.isColliding(coin)) {
+            this.statusBarCoin.setPercentage(coin.energy);  // Korrektur: Verwenden Sie "coin.energy"
+        }
+    });
+}
 
     checkCollisionsBottle(){
         this.level.enemies.forEach((enemy) => {
