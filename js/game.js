@@ -1,17 +1,17 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let music_sound = new Audio('./audio/music3.wav');
 let ePressed = false;
+let music_sound = new Audio('./audio/music3.wav');
+music_sound.pause();
 music_sound.volume = .15;
-music_sound.loop = true; // Wiederholt die Musik kontinuierlich
-music_sound.play();
+music_sound.loop = true;
 
 function init() {
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("startGameButton").addEventListener("click", startGame);
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
-    console.log('My Character is', world.character);
 }
 
 window.addEventListener('keypress', (event) => {

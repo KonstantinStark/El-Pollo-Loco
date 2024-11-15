@@ -10,10 +10,46 @@ body {
     background-attachment: fixed;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+#startGameButton {
+    position: absolute;
+    bottom: 50px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+}
+
 canvas {
     border: solid 5px black;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+#canvas {
+    position: relative;
+    z-index: 1;  /* Canvas bleibt unterhalb des Overlays */
+    display: block;  /* Canvas muss angezeigt werden */
 }
 
 h1 {
@@ -24,6 +60,11 @@ h1 {
     font-size: 80px;
     text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
     animation: pulse 8s ease-in-out infinite;    
+}
+
+h2 {
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @keyframes pulse {
@@ -55,7 +96,74 @@ h1 {
 
 .description p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    color: rgb(192, 192, 192);
+    color: rgb(255, 255, 255);
+}
+
+.mute-button {
+    padding-top: 9px;
+}
+
+.legalNoticeAndPrivacyPolicyContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 13svh;
+}
+
+.privacyPolicy {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0, 0.5);
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    color: #ebebeb;
+    text-decoration: none;
+}
+
+.privacyPolicyTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 80%;
+    padding-bottom: 5svh;
+    color: white;
+    background-color: rgba(80, 80, 80, 0.658);
+    padding: 20px;
+}
+
+.privacyPolicyText {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.legalNotice {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0, 0.5);
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    color: #ebebeb;
+    text-decoration: none;
+}
+
+.legalNoticeTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 80%;
+    padding-bottom: 5svh;
+    color: white;
+    background-color: rgba(80, 80, 80, 0.658);
+    padding: 20px;
+}
+
+.legalNoticeText {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

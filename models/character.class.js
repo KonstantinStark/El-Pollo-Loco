@@ -38,9 +38,9 @@ class Character extends MovableObject {
     ];
 
     world;
-    walking_sound = new Audio('./audio/walk.wav')
     jump_sound = new Audio('./audio/jump.wav')
     loose_sound = new Audio('./audio/loose.mp3')
+    walking_sound = new Audio('./audio/walk.wav')
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
@@ -53,8 +53,8 @@ class Character extends MovableObject {
     }
 
     animate() {
-        let deadAnimation = false; 
-        let deadImage= false;
+        let deadAnimation = false;
+        let deadImage = false;
         setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
@@ -80,9 +80,9 @@ class Character extends MovableObject {
                 setTimeout(() => {
                     this.showGameOverScreen();
                 }, 1000);
-                this.img = null; 
-                deadAnimation = true; 
-                deadImage = true; 
+                this.img = null;
+                deadAnimation = true;
+                deadImage = true;
             } else if (deadImage) {
                 this.img = null;
             }
@@ -90,7 +90,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-         if (this.isHurt()) {
+            if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
