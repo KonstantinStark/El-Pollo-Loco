@@ -136,7 +136,6 @@ class Character extends MovableObject {
         tryAgainButton.style.transform = "translateX(-50%)";
         tryAgainButton.style.fontSize = "20px";
         document.body.appendChild(tryAgainButton);
-
         tryAgainButton.addEventListener("click", () => {
             window.location.reload();
         });

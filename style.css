@@ -29,15 +29,26 @@ body {
 }
 
 #startGameButton {
+    font-family: 'MexicanTequila';
     position: absolute;
-    bottom: 50px;
-    padding: 10px 20px;
-    font-size: 20px;
+    bottom: 80px;
+    padding: 5px 10px;
+    padding-top: 10px;
+    font-size: 50px;
     cursor: pointer;
-    background-color: #fff;
-    border: none;
+    border: solid 2px black;
     border-radius: 5px;
-    color: #000;
+    color: #a0220a;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+    background-color: #ffcd00; 
+    transition: all 0.3s ease; 
+}
+
+#startGameButton:hover {
+    background-color: #a0220a;
+    color: #fff;
+    box-shadow: 0px 0px 20px rgba(160, 34, 10, 0.7); 
+    transform: scale(1.1); 
 }
 
 canvas {
@@ -48,8 +59,8 @@ canvas {
 
 #canvas {
     position: relative;
-    z-index: 1;  /* Canvas bleibt unterhalb des Overlays */
-    display: block;  /* Canvas muss angezeigt werden */
+    z-index: 1; 
+    display: block;
 }
 
 h1 {

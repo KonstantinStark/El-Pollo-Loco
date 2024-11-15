@@ -2,7 +2,6 @@ function startGame() {
     music_sound.play();
     document.getElementById("overlay").style.display = "none";
     document.getElementById("canvas").style.visibility = "visible";
-    console.log("Spiel gestartet!");
 }
 
 function toggleMute() {
