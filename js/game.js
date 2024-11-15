@@ -2,6 +2,10 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let music_sound = new Audio('./audio/music3.wav');
+let jump_sound = new Audio('./audio/jump.wav')
+let loose_sound = new Audio('./audio/loose.mp3')
+let walking_sound = new Audio('./audio/walk.wav')
+let throw_sound = new Audio('./audio/throw.wav')
 ePressed = false; 
 music_sound.pause();
 music_sound.volume = 0.15;

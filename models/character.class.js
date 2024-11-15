@@ -38,9 +38,6 @@ class Character extends MovableObject {
     ];
 
     world;
-    jump_sound = new Audio('./audio/jump.wav')
-    loose_sound = new Audio('./audio/loose.mp3')
-    walking_sound = new Audio('./audio/walk.wav')
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
@@ -56,12 +53,12 @@ class Character extends MovableObject {
         let deadAnimation = false;
         let deadImage = false;
         setInterval(() => {
-            this.walking_sound.pause();
+            walking_sound.pause();
             if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
                 if (!this.isAboveGround()) {
-                    this.walking_sound.play();
+                    walking_sound.play();
                 }
             }
 
@@ -69,7 +66,7 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.otherDirection = true;
                 if (!this.isAboveGround()) {
-                    this.walking_sound.play();
+                    walking_sound.play();
                 }
             }
 
@@ -111,12 +108,12 @@ class Character extends MovableObject {
     }
 
     jump() {
-        this.jump_sound.play();
+        jump_sound.play();
         this.speedY = 20;
     }
 
     showGameOverScreen() {
-        this.loose_sound.play();
+        loose_sound.play();
 
         let gameOverImage = document.createElement("img");
         gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over.png";

@@ -6,8 +6,6 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ];
 
-    throw_sound = new Audio('./audio/throw.wav')
-
     constructor(x, y) {
         super();
         this.loadImages(this.IMAGES_ROTATE);
@@ -21,7 +19,7 @@ class ThrowableObject extends MovableObject {
     }
     
     throw() {
-        this.throw_sound.play();
+        throw_sound.play();
         this.speedY = 21;
         this.applyGravity();
 
