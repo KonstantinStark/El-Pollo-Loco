@@ -60,13 +60,17 @@ class Character extends MovableObject {
             if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
+                if (!this.isAboveGround()) {
+                    this.walking_sound.play();
+                }
             }
 
             if (this.world.keyboard.A && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.play();
+                if (!this.isAboveGround()) {
+                    this.walking_sound.play();
+                }
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -113,29 +117,52 @@ class Character extends MovableObject {
         this.speedY = 20;
     }
 
-
     showGameOverScreen() {
         this.loose_sound.play();
-        let gameOverText = document.createElement("div");
-        gameOverText.innerHTML = "Game Over";
-        gameOverText.style.position = "absolute";
-        gameOverText.style.top = "50%";
-        gameOverText.style.left = "50%";
-        gameOverText.style.transform = "translate(-50%, -50%)";
-        gameOverText.style.fontSize = "80px";
-        gameOverText.style.color = "red";
-        gameOverText.style.zIndex = "100";
-        gameOverText.style.textShadow = "5px 5px 10px rgba(0, 0, 0, 0.5)";
-        document.body.appendChild(gameOverText);
+
+        let gameOverImage = document.createElement("img");
+        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over.png";
+        gameOverImage.style.position = "fixed";
+        gameOverImage.style.top = "0";
+        gameOverImage.style.left = "0";
+        gameOverImage.style.width = "100%";
+        gameOverImage.style.height = "100%";
+        gameOverImage.style.objectFit = "cover";
+        gameOverImage.style.zIndex = "100";
+        document.body.appendChild(gameOverImage);
 
         let tryAgainButton = document.createElement("button");
         tryAgainButton.innerHTML = "Try Again";
+        tryAgainButton.style.fontFamily = "'MexicanTequila'";
         tryAgainButton.style.position = "absolute";
-        tryAgainButton.style.top = "60%";
-        tryAgainButton.style.left = "50%";
-        tryAgainButton.style.transform = "translateX(-50%)";
-        tryAgainButton.style.fontSize = "20px";
+        tryAgainButton.style.bottom = "65px";
+        tryAgainButton.style.padding = "5px 10px";
+        tryAgainButton.style.paddingTop = "10px";
+        tryAgainButton.style.fontSize = "50px";
+        tryAgainButton.style.cursor = "pointer";
+        tryAgainButton.style.border = "solid 2px black";
+        tryAgainButton.style.borderRadius = "5px";
+        tryAgainButton.style.color = "#a0220a";
+        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+        tryAgainButton.style.backgroundColor = "#ffcd00";
+        tryAgainButton.style.transition = "all 0.3s ease";
+        tryAgainButton.style.zIndex = "101";
         document.body.appendChild(tryAgainButton);
+
+        tryAgainButton.addEventListener("mouseover", () => {
+            tryAgainButton.style.backgroundColor = "#a0220a";
+            tryAgainButton.style.color = "#fff";
+            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
+            tryAgainButton.style.transform = "scale(1.1)";
+        });
+
+        tryAgainButton.addEventListener("mouseout", () => {
+            tryAgainButton.style.backgroundColor = "#ffcd00";
+            tryAgainButton.style.color = "#a0220a";
+            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+            tryAgainButton.style.transform = "scale(1)";
+        });
+
         tryAgainButton.addEventListener("click", () => {
             window.location.reload();
         });

@@ -4,12 +4,19 @@ let keyboard = new Keyboard();
 let ePressed = false;
 let music_sound = new Audio('./audio/music3.wav');
 music_sound.pause();
-music_sound.volume = .15;
+music_sound.volume = 0.15;
 music_sound.loop = true;
 
 function init() {
     document.getElementById("overlay").style.display = "flex";
     document.getElementById("startGameButton").addEventListener("click", startGame);
+}
+
+function startGame() {
+    music_sound.play();
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("canvas").style.visibility = "visible";
+    initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }

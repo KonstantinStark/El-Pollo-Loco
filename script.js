@@ -1,9 +1,3 @@
-function startGame() {
-    music_sound.play();
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("canvas").style.visibility = "visible";
-}
-
 function toggleMute() {
     let muteIcon = document.getElementById("muteIcon");
     if (music_sound.muted) {
