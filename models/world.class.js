@@ -8,8 +8,10 @@ class World {
     statusBarHealth = new StatusBarHealth();
     statusBarCoin = new StatusBarCoin();
     statusBarBottle = new StatusBarBottle();
+    statusBarHealthEndboss = new StatusBarHealthEndboss();
     throwableObjects = [];
     throwCooldown = false;
+    endboss = new Endboss();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -22,6 +24,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.endboss.world = this;
     }
 
     run() {
@@ -49,9 +52,9 @@ class World {
     }
 
 
-    checkCollisions(){
+    checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) ) {
+            if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy)
             }
@@ -63,13 +66,13 @@ class World {
             if (this.character.isColliding(coin)) {
                 coin_sound.currentTime = 0;
                 coin_sound.play();
-                this.statusBarCoin.percentage += 10;  
+                this.statusBarCoin.percentage += 10;
                 if (this.statusBarCoin.percentage > 100) {
                     this.statusBarCoin.percentage = 100;
                 }
                 this.statusBarCoin.setPercentage(this.statusBarCoin.percentage);
-                
-                this.level.coins.splice(index, 1);  
+
+                this.level.coins.splice(index, 1);
             }
         });
     }
@@ -89,17 +92,21 @@ class World {
     }
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);        
-        
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.level.clouds);
-        
+
+        if (this.character.x >= this.endboss.x - 800) {
+            this.addToMap(this.statusBarHealthEndboss);
+        }    
+
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        
+
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
@@ -108,7 +115,7 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0);
-        
+
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
