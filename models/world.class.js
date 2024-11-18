@@ -40,7 +40,7 @@ class World {
         if (this.keyboard.E && !ePressed && this.statusBarBottle.percentage >= 20 && !this.throwCooldown) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
-            this.statusBarBottle.setPercentage(this.statusBarBottle.percentage - 20);
+            this.statusBarBottle.setPercentage(this.statusBarBottle.percentage - 20); 
             this.throwCooldown = true;
             setTimeout(() => {
                 this.throwCooldown = false;
@@ -50,6 +50,22 @@ class World {
             ePressed = false;
         }
     }
+
+    checkCollisionsWithEndboss() {
+    this.throwableObjects.forEach((bottle) => {
+        if (this.level.endboss.isColliding(bottle)) {
+            this.statusBarHealthEndboss.percentage -= 10; 
+            if (this.statusBarHealthEndboss.percentage < 0) {
+                this.statusBarHealthEndboss.percentage = 0; 
+            }
+            this.statusBarHealthEndboss.setPercentage(this.statusBarHealthEndboss.percentage);
+            const index = this.throwableObjects.indexOf(bottle);
+            if (index > -1) {
+                this.throwableObjects.splice(index, 1);
+            }
+        }
+    });
+}
 
 
     checkCollisions() {
@@ -71,7 +87,6 @@ class World {
                     this.statusBarCoin.percentage = 100;
                 }
                 this.statusBarCoin.setPercentage(this.statusBarCoin.percentage);
-
                 this.level.coins.splice(index, 1);
             }
         });

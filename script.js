@@ -2,7 +2,6 @@ function toggleMute() {
     let muteIcon = document.getElementById("muteIcon");
 
     if (music_sound.muted) {
-        // Musik und alle Soundeffekte wieder aktivieren
         music_sound.muted = false;
         jump_sound.muted = false;
         loose_sound.muted = false;
@@ -12,7 +11,6 @@ function toggleMute() {
         coin_sound.muted = false; 
         muteIcon.src = "./img/10_icons/on.svg";
     } else {
-        // Alle Soundeffekte stummschalten
         music_sound.muted = true;
         jump_sound.muted = true;
         loose_sound.muted = true;

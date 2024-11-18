@@ -38,7 +38,7 @@ class StatusBarBottle extends DrawableObject {
         } else if (this.percentage <= 80) {
             return 4;
         } else {
-            return 5;  // Das Bild für die volle Flasche
+            return 5;
         }
     }
 }

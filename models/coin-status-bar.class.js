@@ -38,7 +38,7 @@ class StatusBarCoin extends DrawableObject {
         } else if (this.percentage <= 80) {
             return 4;
         } else {
-            return 5;  // Der Index für das volle Coin-Bild
+            return 5;
         }
     }
 }
