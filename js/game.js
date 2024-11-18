@@ -6,6 +6,8 @@ let jump_sound = new Audio('./audio/jump.wav')
 let loose_sound = new Audio('./audio/loose.mp3')
 let walking_sound = new Audio('./audio/walk.wav')
 let throw_sound = new Audio('./audio/throw.wav')
+let coin_sound = new Audio('./audio/coin.wav')
+let pick_up_sound = new Audio('./audio/pick.wav')
 ePressed = false; 
 music_sound.pause();
 music_sound.volume = 0.15;

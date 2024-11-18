@@ -2,18 +2,24 @@ function toggleMute() {
     let muteIcon = document.getElementById("muteIcon");
 
     if (music_sound.muted) {
+        // Musik und alle Soundeffekte wieder aktivieren
         music_sound.muted = false;
         jump_sound.muted = false;
         loose_sound.muted = false;
         walking_sound.muted = false;
         throw_sound.muted = false;
+        pick_up_sound.muted = false;  
+        coin_sound.muted = false; 
         muteIcon.src = "./img/10_icons/on.svg";
     } else {
+        // Alle Soundeffekte stummschalten
         music_sound.muted = true;
         jump_sound.muted = true;
         loose_sound.muted = true;
         walking_sound.muted = true;
         throw_sound.muted = true;
+        pick_up_sound.muted = true; 
+        coin_sound.muted = true; 
         muteIcon.src = "./img/10_icons/mute.svg";
     }
 }
