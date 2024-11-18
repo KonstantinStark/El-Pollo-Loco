@@ -11,7 +11,6 @@ class World {
     statusBarHealthEndboss = new StatusBarHealthEndboss();
     throwableObjects = [];
     throwCooldown = false;
-    endboss = new Endboss();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -24,7 +23,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.endboss.world = this;
+        this.level.endboss.world = this;
     }
 
     run() {
@@ -33,6 +32,7 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionsCoin();
             this.checkCollisionsBottle();
+            this.checkCollisionsWithEndboss();
         }, 1);
     }
 
@@ -52,17 +52,19 @@ class World {
     }
 
     checkCollisionsWithEndboss() {
-    this.throwableObjects.forEach((bottle) => {
-        if (this.level.endboss.isColliding(bottle)) {
-            this.statusBarHealthEndboss.percentage -= 10; 
+        this.throwableObjects.forEach((bottle) => {
+            if (this.level.endboss[0].isColliding(bottle)) {
+                this.statusBarHealthEndboss.percentage -= 20; 
             if (this.statusBarHealthEndboss.percentage < 0) {
                 this.statusBarHealthEndboss.percentage = 0; 
             }
             this.statusBarHealthEndboss.setPercentage(this.statusBarHealthEndboss.percentage);
-            const index = this.throwableObjects.indexOf(bottle);
+            let index = this.throwableObjects.indexOf(bottle);
             if (index > -1) {
                 this.throwableObjects.splice(index, 1);
             }
+            
+            
         }
     });
 }
@@ -114,9 +116,9 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.level.clouds);
 
-        if (this.character.x >= this.endboss.x - 800) {
+        if (this.character.x >= this.level.endboss[0].x - 800) {
             this.addToMap(this.statusBarHealthEndboss);
-        }    
+        }   
 
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
@@ -125,6 +127,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
 
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);

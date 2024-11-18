@@ -13,6 +13,7 @@ class StatusBarHealthEndboss extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH_ENDBOSS);
+        // gedebuggt > funktioniert
         this.x = 600;
         this.y = -4;
         this.width = 200;
@@ -20,7 +21,7 @@ class StatusBarHealthEndboss extends DrawableObject {
         this.setPercentage(100);
     }
 
-    setPercentage(percentage) {
+    setPercentage(percentage) { // gedebuggt > funktioniert
         this.percentage = percentage;
         let path = this.IMAGES_HEALTH_ENDBOSS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
