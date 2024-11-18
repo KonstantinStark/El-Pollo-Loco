@@ -26,6 +26,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollisionsCoin();
             this.checkThrowObjects();
         }, 1);
     }
@@ -51,12 +52,18 @@ class World {
     }
 
     checkCollisionsCoin() {
-    this.level.coins.forEach((coin) => {
-        if (this.character.isColliding(coin)) {
-            this.statusBarCoin.setPercentage(coin.energy);  // Korrektur: Verwenden Sie "coin.energy"
-        }
-    });
-}
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.statusBarCoin.percentage += 20;  
+                if (this.statusBarCoin.percentage > 100) {
+                    this.statusBarCoin.percentage = 100;
+                }
+                this.statusBarCoin.setPercentage(this.statusBarCoin.percentage);
+                
+                this.level.coins.splice(index, 1);  
+            }
+        });
+    }
 
     checkCollisionsBottle(){
         this.level.enemies.forEach((enemy) => {
