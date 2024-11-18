@@ -33,6 +33,7 @@ class World {
             this.checkCollisionsCoin();
             this.checkCollisionsBottle();
             this.checkCollisionsWithEndboss();
+            this.checkCharacterCollisionsWithEndboss();
         }, 1);
     }
 
@@ -40,7 +41,7 @@ class World {
         if (this.keyboard.E && !ePressed && this.statusBarBottle.percentage >= 20 && !this.throwCooldown) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
-            this.statusBarBottle.setPercentage(this.statusBarBottle.percentage - 20); 
+            this.statusBarBottle.setPercentage(this.statusBarBottle.percentage - 20);
             this.throwCooldown = true;
             setTimeout(() => {
                 this.throwCooldown = false;
@@ -51,23 +52,32 @@ class World {
         }
     }
 
+    checkCharacterCollisionsWithEndboss() {
+        this.level.endboss.forEach((endboss) => {
+            if (this.character.isColliding(endboss)) {
+                this.character.hit();
+                this.statusBarHealth.setPercentage(this.character.energy);
+            }
+        });
+    }
+
     checkCollisionsWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (this.level.endboss[0].isColliding(bottle)) {
-                this.statusBarHealthEndboss.percentage -= 20; 
-            if (this.statusBarHealthEndboss.percentage < 0) {
-                this.statusBarHealthEndboss.percentage = 0; 
+                this.statusBarHealthEndboss.percentage -= 15;
+                if (this.statusBarHealthEndboss.percentage < 0) {
+                    this.statusBarHealthEndboss.percentage = 0;
+                }
+                this.statusBarHealthEndboss.setPercentage(this.statusBarHealthEndboss.percentage);
+                let index = this.throwableObjects.indexOf(bottle);
+                if (index > -1) {
+                    this.throwableObjects.splice(index, 1);
+                }
+
+
             }
-            this.statusBarHealthEndboss.setPercentage(this.statusBarHealthEndboss.percentage);
-            let index = this.throwableObjects.indexOf(bottle);
-            if (index > -1) {
-                this.throwableObjects.splice(index, 1);
-            }
-            
-            
-        }
-    });
-}
+        });
+    }
 
 
     checkCollisions() {
@@ -118,7 +128,7 @@ class World {
 
         if (this.character.x >= this.level.endboss[0].x - 800) {
             this.addToMap(this.statusBarHealthEndboss);
-        }   
+        }
 
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
