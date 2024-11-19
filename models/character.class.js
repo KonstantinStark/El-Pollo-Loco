@@ -77,8 +77,11 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
 
             if (this.isDead() && !deadAnimation) {
+                scream_sound.play();
                 this.playAnimation(this.IMAGES_DEAD);
-                this.showGameOverScreen();
+                setTimeout(() => {
+                    this.showGameOverScreen();
+                }, 1000);
                 this.img = null;
                 deadAnimation = true;
                 deadImage = true;
