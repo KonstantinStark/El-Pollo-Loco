@@ -8,6 +8,7 @@ let walking_sound = new Audio('./audio/walk.wav')
 let throw_sound = new Audio('./audio/throw.wav')
 let coin_sound = new Audio('./audio/coin.wav')
 let pick_up_sound = new Audio('./audio/pick.wav')
+let scream_sound = new Audio('./audio/scream.wav')
 ePressed = false; 
 music_sound.pause();
 music_sound.volume = 0.15;

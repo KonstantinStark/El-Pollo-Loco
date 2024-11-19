@@ -116,13 +116,13 @@ class Character extends MovableObject {
         loose_sound.play();
 
         let gameOverImage = document.createElement("img");
-        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over.png";
+        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
         gameOverImage.style.position = "fixed";
-        gameOverImage.style.top = "0";
-        gameOverImage.style.left = "0";
-        gameOverImage.style.width = "100%";
-        gameOverImage.style.height = "100%";
-        gameOverImage.style.objectFit = "cover";
+        gameOverImage.style.top = "35%";
+        gameOverImage.style.left = "50";
+        gameOverImage.style.width = "30%";
+        gameOverImage.style.height = "30%";
+        gameOverImage.style.objectFit = "contain";
         gameOverImage.style.zIndex = "100";
         document.body.appendChild(gameOverImage);
 
