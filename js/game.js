@@ -64,3 +64,13 @@ window.addEventListener('keyup', (event) => {
         keyboard.SPACE = false;
     }
 });
+
+window.matchMedia("(orientation: portrait").addEventListener("change", e => {
+    const portrait = e.matches;
+
+    if (portrait) {
+        document.getElementById('rotateOverlay').style = 'display: block';
+    } else {
+        document.getElementById('rotateOverlay').style = 'display: none';
+    }
+});

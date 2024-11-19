@@ -10,6 +10,19 @@ body {
     background-attachment: fixed;
 }
 
+.rotate-overlay {
+    background-image: url('./img/9_intro_outro_screens/rotateDevice.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    display: none;
+    backdrop-filter: blur(5px);
+    z-index: 1001;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -56,7 +69,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
 }
 
 canvas {
@@ -127,7 +140,6 @@ h2 {
     align-items: center;
     justify-content: center;
     gap: 40px;
-    padding-top: 9svh;
 }
 
 .privacyPolicy {

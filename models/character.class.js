@@ -118,7 +118,7 @@ class Character extends MovableObject {
         let gameOverImage = document.createElement("img");
         gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
         gameOverImage.style.position = "fixed";
-        gameOverImage.style.top = "35%";
+        gameOverImage.style.top = "30%";
         gameOverImage.style.left = "50";
         gameOverImage.style.width = "30%";
         gameOverImage.style.height = "30%";
