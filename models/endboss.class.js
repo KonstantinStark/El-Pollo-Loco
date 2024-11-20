@@ -3,6 +3,12 @@ class Endboss extends MovableObject {
     width = 300;
     y = 55;
     x = 3900;
+    offset = {
+        top: 50,
+        bottom: 5,
+        left: 4,
+        right: 9,
+      };
     hadFirstContact = false;
 
     IMAGES_ALERT = [
