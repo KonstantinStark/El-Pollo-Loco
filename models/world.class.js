@@ -157,6 +157,7 @@ class World {
     }
 
     addToMap(mo) {
+    if (mo.img && mo.img.complete) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
@@ -167,6 +168,7 @@ class World {
             this.flipImageBack(mo);
         }
     }
+}
 
     flipImage(mo) {
         this.ctx.save();
