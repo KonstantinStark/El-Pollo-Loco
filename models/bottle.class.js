@@ -8,7 +8,6 @@ class Bottle extends MovableObject {
         left: 4,
         right: 9,
       };
-
     IMAGES_GROUND = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
