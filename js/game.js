@@ -20,6 +20,62 @@ function init() {
     document.getElementById("startGameButton").addEventListener("click", startGame);
 }
 
+function init() {
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("startGameButton").addEventListener("click", startGame);
+    document.getElementById("leftButton").addEventListener("mousedown", () => {
+        keyboard.A = true;
+    });
+    document.getElementById("leftButton").addEventListener("mouseup", () => {
+        keyboard.A = false;
+    });
+    document.getElementById("leftButton").addEventListener("touchstart", () => {
+        keyboard.A = true;
+    });
+    document.getElementById("leftButton").addEventListener("touchend", () => {
+        keyboard.A = false;
+    });
+
+    document.getElementById("rightButton").addEventListener("mousedown", () => {
+        keyboard.D = true;
+    });
+    document.getElementById("rightButton").addEventListener("mouseup", () => {
+        keyboard.D = false;
+    });
+    document.getElementById("rightButton").addEventListener("touchstart", () => {
+        keyboard.D = true;
+    });
+    document.getElementById("rightButton").addEventListener("touchend", () => {
+        keyboard.D = false;
+    });
+
+    document.getElementById("throwButton").addEventListener("mousedown", () => {
+        keyboard.E = true;
+    });
+    document.getElementById("throwButton").addEventListener("mouseup", () => {
+        keyboard.E = false;
+    });
+    document.getElementById("throwButton").addEventListener("touchstart", () => {
+        keyboard.E = true;
+    });
+    document.getElementById("throwButton").addEventListener("touchend", () => {
+        keyboard.E = false;
+    });
+
+    document.getElementById("upButton").addEventListener("mousedown", () => {
+        keyboard.SPACE = true;
+    });
+    document.getElementById("upButton").addEventListener("mouseup", () => {
+        keyboard.SPACE = false;
+    });
+    document.getElementById("upButton").addEventListener("touchstart", () => {
+        keyboard.SPACE = true;
+    });
+    document.getElementById("upButton").addEventListener("touchend", () => {
+        keyboard.SPACE = false;
+    });
+}
+
 function startGame() {
     music_sound.play();
     document.getElementById("overlay").style.display = "none";
