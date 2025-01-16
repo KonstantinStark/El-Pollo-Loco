@@ -210,16 +210,28 @@ h2 {
 
 .test {
     position: absolute;
-    top: 90%;
+    top: 87%;
     z-index: 1;
     left: 1%;
 }
 
 .test2 {
     position: absolute;
-    top: 90%;
+    top: 87%;
     z-index: 1;
     right: 1%;
+}
+
+.svg-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.svg-button img {
+    width: 50px; /* Größe anpassen */
+    height: auto;
 }
 
 }
