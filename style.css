@@ -37,7 +37,6 @@ body {
 }
 
 .overlay img {
-    max-width: 90%;
     max-height: 90%;
 }
 
@@ -53,15 +52,15 @@ body {
     border-radius: 5px;
     color: #a0220a;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
-    background-color: #ffcd00; 
-    transition: all 0.3s ease; 
+    background-color: #ffcd00;
+    transition: all 0.3s ease;
 }
 
 #startGameButton:hover {
     background-color: #a0220a;
     color: #fff;
-    box-shadow: 0px 0px 20px rgba(160, 34, 10, 0.7); 
-    transform: scale(1.1); 
+    box-shadow: 0px 0px 20px rgba(160, 34, 10, 0.7);
+    transform: scale(1.1);
 }
 
 .canvas-container {
@@ -81,7 +80,7 @@ canvas {
 
 #canvas {
     position: relative;
-    z-index: 1; 
+    z-index: 1;
     display: block;
 }
 
@@ -92,7 +91,7 @@ h1 {
     color: #ffffff;
     font-size: 80px;
     text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
-    animation: pulse 8s ease-in-out infinite;    
+    animation: pulse 8s ease-in-out infinite;
 }
 
 h2 {
@@ -138,11 +137,12 @@ h2 {
 }
 
 .legalNoticeAndPrivacyPolicyContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
+    position: absolute;
+    top: 96%;
+}
+
+.legalNoticeAndPrivacyPolicy {
+    
 }
 
 .privacyPolicy {
@@ -205,8 +205,8 @@ h2 {
     }
 
     h1 {
-        font-size: 60px;  
-      }
+        font-size: 60px;
+    }
 }
 
 @media(max-width: 630px) {
@@ -215,8 +215,8 @@ h2 {
     }
 
     h1 {
-        font-size: 40px;  
-      }
+        font-size: 40px;
+    }
 }
 
 @media only screen and (max-width: 820px) {
