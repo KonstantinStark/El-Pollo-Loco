@@ -116,10 +116,13 @@ h2 {
     }
 }
 
+.description-container {
+    position: absolute;
+    top: 83%;
+}
+
 .description {
     display: flex;
-    width: 700px;
-    justify-content: space-evenly;
 }
 
 .description p {
@@ -138,11 +141,7 @@ h2 {
 
 .legalNoticeAndPrivacyPolicyContainer {
     position: absolute;
-    top: 96%;
-}
-
-.legalNoticeAndPrivacyPolicy {
-    
+    top: 82%;
 }
 
 .privacyPolicy {
@@ -200,10 +199,6 @@ h2 {
 }
 
 @media(max-width: 700px) {
-    .description {
-        width: 500px;
-    }
-
     h1 {
         font-size: 60px;
     }

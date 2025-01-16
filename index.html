@@ -33,32 +33,30 @@
 
 <body onload="init()">
     <div class="rotate-overlay" id="rotateOverlay"></div>
-
     <div id="overlay" class="overlay">
+        <div class="description-container">
+            <div class="description">
+                <p>Left/Right = A D</p>&nbsp;&nbsp;&nbsp;
+                <p>Jump = Space</p>&nbsp;&nbsp;&nbsp;
+                <p>Throw Bottle = E</p>
+            </div>
+        </div>
         <img src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="Start Screen">
         <button id="startGameButton">Start Game</button>
         <div class="legalNoticeAndPrivacyPolicyContainer">
-            <div class="legalNoticeAndPrivacyPolicy">
-                <a href="legal-notice.html" class="legalNotice" target="_blank" rel="noreferrer noopener">Legal
-                    notice&nbsp;</a>
-                <a href="privacy-policy.html" class="privacyPolicy" target="_blank" rel="noreferrer noopener">&nbsp;Privacy
-                    legacy</a>
-            </div>
+            <a href="legal-notice.html" class="legalNotice" target="_blank" rel="noreferrer noopener">Legal
+                notice&nbsp;</a>
+            <a href="privacy-policy.html" class="privacyPolicy" target="_blank" rel="noreferrer noopener">&nbsp;Privacy
+                legacy</a>
         </div>
     </div>
-
-    <!-- <h1>El Pollo Loco</h1> -->
-
     <div class="canvas-container">
         <canvas id="canvas" width="820" height="480"></canvas>
         <div class="mute-button">
-            <img id="muteIcon" src="./img/10_icons/on.svg" alt="Mute" width="40" height="40" onclick="toggleMute()"
-                style="cursor: pointer;">
-        </div>
-        <div class="description">
-            <p>Left/Right = A D</p>
-            <p>Jump = Space</p>
-            <p>Throw Bottle = E</p>
+            <div>
+                <img id="muteIcon" src="./img/10_icons/on.svg" alt="Mute" width="40" height="40" onclick="toggleMute()"
+                    style="cursor: pointer;">
+            </div>
         </div>
     </div>
 </body>
