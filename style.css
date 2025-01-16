@@ -37,7 +37,7 @@ body {
 }
 
 .overlay img {
-    max-height: 90%;
+    max-height: 80%;
 }
 
 #startGameButton {
@@ -136,8 +136,7 @@ h2 {
 
 .mute-button {
     position: absolute;
-    right: 1%;
-    top: 70%;
+    top: 84%;
     z-index: 2;
 }
 
@@ -205,6 +204,26 @@ h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.movment {
+    display: flex;   
+}
+
+.test {
+    position: absolute;
+    top: 90%;
+    z-index: 1;
+    left: 1%;
+}
+
+.test2 {
+    position: absolute;
+    top: 90%;
+    z-index: 1;
+    right: 1%;
+}
+
+}
+
 @media(max-width: 700px) {
     h1 {
         font-size: 60px;
@@ -223,15 +242,18 @@ h2 {
 @media(max-width: 932px) {
 .mute-button {
     position: absolute;
-    right: 1%;
     top: 95%;
     z-index: 2;
 }
+
+.movment {
+    display: block!important;
+}
 }
 
-@media only screen and (max-width: 820px) {
+@media only screen and (max-width: 1400px) {
     canvas {
-        width: 100%;
+        width: 90vw;
     }
 }
 
