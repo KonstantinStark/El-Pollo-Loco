@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
         bottom: 5,
         left: 4,
         right: 9,
-      };
+    };
     hadFirstContact = false;
 
     IMAGES_ALERT = [
@@ -51,13 +51,14 @@ class Endboss extends MovableObject {
     animate() {
         let i = 0;
         setInterval(() => {
-            if (i < 10) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_ALERT);
-            } else {
-                this.playAnimation(this.IMAGES_ATTACK);
+            } else if (true) {
+                this.playAnimation(this.IMAGES_ALERT);
+            } if (this.lastHit > 0 && this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT); 
             }
             i++;
-    
             if (world.character.x > 3400 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;

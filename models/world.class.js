@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    enemy = [SmallChicken, Chicken, Endboss];
     level = level1;
     canvas;
     ctx;
@@ -64,6 +65,7 @@ class World {
     checkCollisionsWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (this.level.endboss[0].isColliding(bottle)) {
+                // hier wird meine Variable hasHitEnemy = false auf true gesetzt, damit die bottle andere animationen abspielt
                 this.statusBarHealthEndboss.percentage -= 15;
                 if (this.statusBarHealthEndboss.percentage < 0) {
                     this.statusBarHealthEndboss.percentage = 0;
@@ -73,8 +75,6 @@ class World {
                 if (index > -1) {
                     this.throwableObjects.splice(index, 1);
                 }
-
-
             }
         });
     }

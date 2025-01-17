@@ -8,7 +8,7 @@ class Character extends MovableObject {
         bottom: 5,
         left: 4,
         right: 9,
-      };
+    }; // HITBOX OFFSET
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -56,65 +56,56 @@ class Character extends MovableObject {
     }
 
     animate() {
-        let deadAnimation = false;
-        let deadImage = false;
+        let isDeadAnimationPlayed = false;
         setInterval(() => {
             walking_sound.pause();
-            if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                if (!this.isAboveGround()) {
-                    walking_sound.play();
+            if (!this.isDead()) {
+                if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
+                    this.moveRight();
+                    this.otherDirection = false;
+                    if (!this.isAboveGround()) {
+                        walking_sound.play();
+                    }
                 }
-            }
-
-            if (this.world.keyboard.A && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                if (!this.isAboveGround()) {
-                    walking_sound.play();
+                if (this.world.keyboard.A && this.x > 0) {
+                    this.moveLeft();
+                    this.otherDirection = true;
+                    if (!this.isAboveGround()) {
+                        walking_sound.play();
+                    }
                 }
+                if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                    this.jump();
+                }
+                this.world.camera_x = -this.x + 100;
             }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-            }
-
-            this.world.camera_x = -this.x + 100;
-
-            if (this.isDead() && !deadAnimation) {
+            if (this.isDead() && !isDeadAnimationPlayed) {
+                isDeadAnimationPlayed = true;
                 scream_sound.play();
                 this.playAnimation(this.IMAGES_DEAD);
+                const animationDuration = this.IMAGES_DEAD.length * 150;
                 setTimeout(() => {
+                    this.img = null;
                     this.showGameOverScreen();
-                }, 1000);
-                this.img = null;
-                deadAnimation = true;
-                deadImage = true;
-            } else if (deadImage) {
-                this.img = null;
+                }, animationDuration);
             }
-
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.D || this.world.keyboard.A) {
-                    this.playAnimation(this.IMAGES_WALKING);
+            if (!this.isDead()) {
+                if (this.isHurt()) {
+                    this.playAnimation(this.IMAGES_HURT);
+                } else if (this.isAboveGround()) {
+                    this.playAnimation(this.IMAGES_JUMPING);
+                } else {
+                    if (this.world.keyboard.D || this.world.keyboard.A) {
+                        this.playAnimation(this.IMAGES_WALKING);
+                    }
                 }
             }
         }, 40);
-
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-        }, 150);
     }
+    
 
     jump() {
         jump_sound.play();
