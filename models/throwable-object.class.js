@@ -7,7 +7,7 @@ class ThrowableObject extends MovableObject {
     ];
 
     hasHitEnemy = false;
-    
+
     constructor(x, y) {
         super();
         this.loadImages(this.IMAGES_ROTATE);
@@ -30,7 +30,15 @@ class ThrowableObject extends MovableObject {
         }, 25);
 
         setInterval(() => {
+            // wenn die flasche enemy trifft soll die rotate stoppen und die splash animation starten
+            // außerdem soll die flasche nach 2 sekunden verschwinden
             this.playRotationAnimation();
+            if (this.hasHitEnemy) {
+                this.playAnimation(this.IMAGES_SPLASH);
+                setTimeout(() => {
+                    this.energy = 0;
+                }, 2000);
+            }
         }, 100);
     }
 }
