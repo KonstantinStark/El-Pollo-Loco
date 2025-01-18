@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
         left: 4,
         right: 9,
     };
-    bossEnergy = 70;
+    
     hadFirstContact = false;
     world;
 
@@ -129,4 +129,3 @@ class Endboss extends MovableObject {
         });
     }
 }
-

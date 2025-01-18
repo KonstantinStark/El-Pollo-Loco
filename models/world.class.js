@@ -76,7 +76,7 @@ class World {
                     this.throwableObjects.splice(index, 1);
                 }
             }
-        });
+        });        
     }
 
     endbossIsHit() {

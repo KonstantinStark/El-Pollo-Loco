@@ -47,6 +47,7 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
+        this.world = this.world;
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -57,9 +58,10 @@ class Character extends MovableObject {
 
     animate() {
         let isDeadAnimationPlayed = false;
-        setInterval(() => {
+        let animationInterval = setInterval(() => {
             walking_sound.pause();
-            if (!this.isDead()) {
+                
+            if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
@@ -89,10 +91,14 @@ class Character extends MovableObject {
                     this.img = null;
                 }, animationDuration);
             }
+            if (this.world.level.endboss[0].bossEnergy === 0) {
+                this.img = null;
+                clearInterval(animationInterval)
+            };
         }, 1000 / 60);
 
         setInterval(() => {
-            if (!this.isDead()) {
+            if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.isHurt()) {
                     this.playAnimation(this.IMAGES_HURT);
                 } else if (this.isAboveGround()) {
@@ -108,6 +114,10 @@ class Character extends MovableObject {
         }, 40);
     }
     
+
+    isEndbossDead() {
+        return this.world.level.endboss[0].bossEnergy == 0
+    }
 
     jump() {
         jump_sound.play();

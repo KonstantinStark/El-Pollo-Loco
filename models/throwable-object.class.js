@@ -40,7 +40,6 @@ class ThrowableObject extends MovableObject {
 
         let animationInterval = setInterval(() => {
             this.playRotationAnimation();
-            console.log(this.hasHitEnemy);
             if (this.hasHitEnemy) {                
                 this.playAnimation(this.IMAGES_SPLASH);
                 setTimeout(() => {
