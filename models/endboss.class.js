@@ -9,7 +9,9 @@ class Endboss extends MovableObject {
         left: 4,
         right: 9,
     };
+    bossEnergy = 70;
     hadFirstContact = false;
+    world;
 
     IMAGES_ALERT = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -44,19 +46,28 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
+        this.world = world;
         this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
     animate() {
         let i = 0;
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_ALERT);
+        let animationInterval = setInterval(() => {
+            if (this.bossIsDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                const animationDuration = this.IMAGES_DEAD.length * 250;
+                setTimeout(() => {
+                    this.showWinScreen();
+                    this.img = null;
+                    clearInterval(animationInterval);
+                }, animationDuration);
             } else if (true) {
                 this.playAnimation(this.IMAGES_ALERT);
             } if (this.lastHit > 0 && this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT); 
+                this.playAnimation(this.IMAGES_HURT);
             }
             i++;
             if (world.character.x > 3400 && !this.hadFirstContact) {
@@ -65,4 +76,57 @@ class Endboss extends MovableObject {
             }
         }, 150);
     }
+
+    showWinScreen() {
+        music_sound.pause();
+        win_sound.play();
+
+        let gameWinImage = document.createElement("img");
+        gameWinImage.src = "./img/9_intro_outro_screens/win/win_2.png";
+        gameWinImage.style.position = "fixed";
+        gameWinImage.style.top = "30%";
+        gameWinImage.style.left = "50";
+        gameWinImage.style.width = "30%";
+        gameWinImage.style.height = "30%";
+        gameWinImage.style.objectFit = "contain";
+        gameWinImage.style.zIndex = "100";
+        document.body.appendChild(gameWinImage);
+
+        let tryAgainButton = document.createElement("button");
+        tryAgainButton.innerHTML = "Try Again";
+        tryAgainButton.style.fontFamily = "'MexicanTequila'";
+        tryAgainButton.style.position = "absolute";
+        tryAgainButton.style.bottom = "65px";
+        tryAgainButton.style.padding = "5px 10px";
+        tryAgainButton.style.paddingTop = "10px";
+        tryAgainButton.style.fontSize = "50px";
+        tryAgainButton.style.cursor = "pointer";
+        tryAgainButton.style.border = "solid 2px black";
+        tryAgainButton.style.borderRadius = "5px";
+        tryAgainButton.style.color = "#a0220a";
+        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+        tryAgainButton.style.backgroundColor = "#ffcd00";
+        tryAgainButton.style.transition = "all 0.3s ease";
+        tryAgainButton.style.zIndex = "101";
+        document.body.appendChild(tryAgainButton);
+
+        tryAgainButton.addEventListener("mouseover", () => {
+            tryAgainButton.style.backgroundColor = "#a0220a";
+            tryAgainButton.style.color = "#fff";
+            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
+            tryAgainButton.style.transform = "scale(1.1)";
+        });
+
+        tryAgainButton.addEventListener("mouseout", () => {
+            tryAgainButton.style.backgroundColor = "#ffcd00";
+            tryAgainButton.style.color = "#a0220a";
+            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+            tryAgainButton.style.transform = "scale(1)";
+        });
+
+        tryAgainButton.addEventListener("click", () => {
+            window.location.reload();
+        });
+    }
 }
+

@@ -5,12 +5,21 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         './img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ];
+    IMAGES_SPLASH = [
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
+    ];
 
     hasHitEnemy = false;
 
     constructor(x, y) {
         super();
         this.loadImages(this.IMAGES_ROTATE);
+        this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
         this.width = 60;
@@ -29,14 +38,14 @@ class ThrowableObject extends MovableObject {
             this.x += 10;
         }, 25);
 
-        setInterval(() => {
-            // wenn die flasche enemy trifft soll die rotate stoppen und die splash animation starten
-            // außerdem soll die flasche nach 2 sekunden verschwinden
+        let animationInterval = setInterval(() => {
             this.playRotationAnimation();
-            if (this.hasHitEnemy) {
+            console.log(this.hasHitEnemy);
+            if (this.hasHitEnemy) {                
                 this.playAnimation(this.IMAGES_SPLASH);
                 setTimeout(() => {
                     this.energy = 0;
+                    clearInterval(animationInterval);
                 }, 2000);
             }
         }, 100);

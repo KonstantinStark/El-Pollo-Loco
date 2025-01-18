@@ -9,6 +9,7 @@ let throw_sound = new Audio('./audio/throw.wav')
 let coin_sound = new Audio('./audio/coin.wav')
 let pick_up_sound = new Audio('./audio/pick.wav')
 let scream_sound = new Audio('./audio/scream.wav')
+let win_sound = new Audio('./audio/win.wav')
 ePressed = false; 
 music_sound.pause();
 music_sound.volume = 0.15;

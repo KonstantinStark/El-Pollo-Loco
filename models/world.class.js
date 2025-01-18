@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    enemy = [SmallChicken, Chicken, Endboss];
     level = level1;
     canvas;
     ctx;
@@ -65,9 +64,9 @@ class World {
     checkCollisionsWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (this.level.endboss[0].isColliding(bottle)) {
-                // hier wird meine Variable hasHitEnemy = false auf true gesetzt, damit die bottle andere animationen abspielt
                 bottle.hasHitEnemy = true;
-                this.statusBarHealthEndboss.percentage -= 15;
+                this.endbossIsHit();
+                this.statusBarHealthEndboss.percentage -= 10;
                 if (this.statusBarHealthEndboss.percentage < 0) {
                     this.statusBarHealthEndboss.percentage = 0;
                 }
@@ -80,6 +79,12 @@ class World {
         });
     }
 
+    endbossIsHit() {
+        this.level.endboss[0].bossEnergy -= 10;
+        if (this.level.endboss[0].bossEnergy < 0) {
+            this.level.endboss[0].bossEnergy = 0;
+        }
+    }
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -181,5 +186,56 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    }
+
+    showGameOverScreen() {
+        loose_sound.play();
+
+        let gameOverImage = document.createElement("img");
+        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
+        gameOverImage.style.position = "fixed";
+        gameOverImage.style.top = "30%";
+        gameOverImage.style.left = "50";
+        gameOverImage.style.width = "30%";
+        gameOverImage.style.height = "30%";
+        gameOverImage.style.objectFit = "contain";
+        gameOverImage.style.zIndex = "100";
+        document.body.appendChild(gameOverImage);
+
+        let tryAgainButton = document.createElement("button");
+        tryAgainButton.innerHTML = "Try Again";
+        tryAgainButton.style.fontFamily = "'MexicanTequila'";
+        tryAgainButton.style.position = "absolute";
+        tryAgainButton.style.bottom = "65px";
+        tryAgainButton.style.padding = "5px 10px";
+        tryAgainButton.style.paddingTop = "10px";
+        tryAgainButton.style.fontSize = "50px";
+        tryAgainButton.style.cursor = "pointer";
+        tryAgainButton.style.border = "solid 2px black";
+        tryAgainButton.style.borderRadius = "5px";
+        tryAgainButton.style.color = "#a0220a";
+        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+        tryAgainButton.style.backgroundColor = "#ffcd00";
+        tryAgainButton.style.transition = "all 0.3s ease";
+        tryAgainButton.style.zIndex = "101";
+        document.body.appendChild(tryAgainButton);
+
+        tryAgainButton.addEventListener("mouseover", () => {
+            tryAgainButton.style.backgroundColor = "#a0220a";
+            tryAgainButton.style.color = "#fff";
+            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
+            tryAgainButton.style.transform = "scale(1.1)";
+        });
+
+        tryAgainButton.addEventListener("mouseout", () => {
+            tryAgainButton.style.backgroundColor = "#ffcd00";
+            tryAgainButton.style.color = "#a0220a";
+            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+            tryAgainButton.style.transform = "scale(1)";
+        });
+
+        tryAgainButton.addEventListener("click", () => {
+            window.location.reload();
+        });
     }
 }

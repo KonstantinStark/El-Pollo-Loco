@@ -8,7 +8,7 @@ class Character extends MovableObject {
         bottom: 5,
         left: 4,
         right: 9,
-    }; // HITBOX OFFSET
+    };
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -83,10 +83,10 @@ class Character extends MovableObject {
                 isDeadAnimationPlayed = true;
                 scream_sound.play();
                 this.playAnimation(this.IMAGES_DEAD);
-                const animationDuration = this.IMAGES_DEAD.length * 150;
+                const animationDuration = this.IMAGES_DEAD.length * 250;
                 setTimeout(() => {
+                    this.world.showGameOverScreen();
                     this.img = null;
-                    this.showGameOverScreen();
                 }, animationDuration);
             }
         }, 1000 / 60);
@@ -102,6 +102,8 @@ class Character extends MovableObject {
                         this.playAnimation(this.IMAGES_WALKING);
                     }
                 }
+            } else if (this.isDead() && !isDeadAnimationPlayed) {
+                this.playAnimation(this.IMAGES_DEAD);
             }
         }, 40);
     }
@@ -110,56 +112,5 @@ class Character extends MovableObject {
     jump() {
         jump_sound.play();
         this.speedY = 20;
-    }
-
-    showGameOverScreen() {
-        loose_sound.play();
-
-        let gameOverImage = document.createElement("img");
-        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
-        gameOverImage.style.position = "fixed";
-        gameOverImage.style.top = "30%";
-        gameOverImage.style.left = "50";
-        gameOverImage.style.width = "30%";
-        gameOverImage.style.height = "30%";
-        gameOverImage.style.objectFit = "contain";
-        gameOverImage.style.zIndex = "100";
-        document.body.appendChild(gameOverImage);
-
-        let tryAgainButton = document.createElement("button");
-        tryAgainButton.innerHTML = "Try Again";
-        tryAgainButton.style.fontFamily = "'MexicanTequila'";
-        tryAgainButton.style.position = "absolute";
-        tryAgainButton.style.bottom = "65px";
-        tryAgainButton.style.padding = "5px 10px";
-        tryAgainButton.style.paddingTop = "10px";
-        tryAgainButton.style.fontSize = "50px";
-        tryAgainButton.style.cursor = "pointer";
-        tryAgainButton.style.border = "solid 2px black";
-        tryAgainButton.style.borderRadius = "5px";
-        tryAgainButton.style.color = "#a0220a";
-        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
-        tryAgainButton.style.backgroundColor = "#ffcd00";
-        tryAgainButton.style.transition = "all 0.3s ease";
-        tryAgainButton.style.zIndex = "101";
-        document.body.appendChild(tryAgainButton);
-
-        tryAgainButton.addEventListener("mouseover", () => {
-            tryAgainButton.style.backgroundColor = "#a0220a";
-            tryAgainButton.style.color = "#fff";
-            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
-            tryAgainButton.style.transform = "scale(1.1)";
-        });
-
-        tryAgainButton.addEventListener("mouseout", () => {
-            tryAgainButton.style.backgroundColor = "#ffcd00";
-            tryAgainButton.style.color = "#a0220a";
-            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
-            tryAgainButton.style.transform = "scale(1)";
-        });
-
-        tryAgainButton.addEventListener("click", () => {
-            window.location.reload();
-        });
     }
 }
