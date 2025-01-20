@@ -75,8 +75,11 @@ class World {
                 if (index > -1) {
                     this.throwableObjects.splice(index, 1);
                 }
+                if (!this.level.endboss[0].isAttacking) {
+                    this.level.endboss[0].isAttacking = true;
+                }
             }
-        });        
+        });
     }
 
     endbossIsHit() {
