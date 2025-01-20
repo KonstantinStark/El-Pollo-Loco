@@ -78,6 +78,7 @@ class World {
                 if (!this.level.endboss[0].isAttacking) {
                     this.level.endboss[0].isAttacking = true;
                 }
+                chicken_sound.play();
             }
         });
     }
@@ -92,8 +93,18 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBarHealth.setPercentage(this.character.energy)
+                if (this.character.isAboveGround() && this.character.speedY < 0) { // Der Charakter ist in der Luft und fällt
+                    enemy.die();
+                    chicken2_sound.play();
+                    setTimeout(() => {
+                        let index = this.level.enemies.indexOf(enemy);
+                        if (index > -1) {
+                            this.level.enemies.splice(index, 1);
+                        }
+                    }, 1000);
+                } else {
+                    this.character.hit();
+                }
             }
         });
     }
