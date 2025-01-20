@@ -93,7 +93,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround() && this.character.speedY < 0) { // Der Charakter ist in der Luft und fällt
+                if (this.character.isAboveGround() && this.character.speedY < 0) {
                     enemy.die();
                     chicken2_sound.play();
                     setTimeout(() => {
