@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1.5;
     energy = 100;
-    bossEnergy = 80;
+    bossEnergy = 10;
     lastHit = 0;
     offset = { left: 0, right: 0, top: 0, bottom: 0 }
     applyGravity() {
@@ -26,9 +26,9 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-               this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-               this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-               this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
     hit() {
@@ -60,7 +60,7 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
-    
+
     stopAnimation() {
         this.img = this.imageCache['./img/2_character_pepe/2_walk/W-21.png'];
     }

@@ -14,7 +14,7 @@ let chicken_sound = new Audio('./audio/chicken.wav')
 let chicken2_sound = new Audio('./audio/chicken2.wav')
 ePressed = false; 
 music_sound.pause();
-music_sound.volume = 0.10;
+music_sound.volume = 0.1;
 music_sound.loop = true;
 
 

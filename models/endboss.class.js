@@ -46,9 +46,8 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
-    constructor() {
+    constructor(world) {
         super().loadImage(this.IMAGES_ALERT[0]);
-        this.world = world;
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
@@ -76,11 +75,24 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             }
             i++;
-            if (world.character.x > 3400 && !this.hadFirstContact) {
+            if (this.world.character.x > 3400 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
             }
         }, 150);
+    }
+
+    resetGame() {
+        this.character = new Character();
+        this.level = level1;
+        this.camera_x = 0;
+        this.statusBarHealth = new StatusBarHealth();
+        this.statusBarCoin = new StatusBarCoin();
+        this.statusBarBottle = new StatusBarBottle();
+        this.statusBarHealthEndboss = new StatusBarHealthEndboss();
+        this.throwableObjects = [];
+        this.throwCooldown = false;
+        this.setWorld();
     }
 
     showWinScreen() {
@@ -131,7 +143,9 @@ class Endboss extends MovableObject {
         });
 
         tryAgainButton.addEventListener("click", () => {
-            window.location.reload();
+            this.resetGame();
+            document.body.removeChild(gameWinImage);
+            document.body.removeChild(tryAgainButton);
         });
     }
 }

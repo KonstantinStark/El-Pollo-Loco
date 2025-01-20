@@ -16,6 +16,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.endboss = new Endboss(this);
         this.draw();
         this.setWorld();
         this.run();
@@ -204,6 +205,19 @@ class World {
         this.ctx.restore();
     }
 
+    reset() {
+        this.character = new Character();
+        this.level = level1;
+        this.camera_x = 0;
+        this.statusBarHealth = new StatusBarHealth();
+        this.statusBarCoin = new StatusBarCoin();
+        this.statusBarBottle = new StatusBarBottle();
+        this.statusBarHealthEndboss = new StatusBarHealthEndboss();
+        this.throwableObjects = [];
+        this.throwCooldown = false;
+        this.setWorld();
+    }
+
     showGameOverScreen() {
         loose_sound.play();
 
@@ -218,7 +232,7 @@ class World {
         gameOverImage.style.zIndex = "100";
         document.body.appendChild(gameOverImage);
 
-        let tryAgainButton = document.createElement("button");
+        let tryAgainButton = document.createElement("button1");
         tryAgainButton.innerHTML = "Try Again";
         tryAgainButton.style.fontFamily = "'MexicanTequila'";
         tryAgainButton.style.position = "absolute";
@@ -251,7 +265,9 @@ class World {
         });
 
         tryAgainButton.addEventListener("click", () => {
-            window.location.reload();
+            this.reset();
+            document.body.removeChild(gameOverImage);
+            document.body.removeChild(tryAgainButton);
         });
     }
 }
