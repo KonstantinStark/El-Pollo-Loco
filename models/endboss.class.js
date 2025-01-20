@@ -13,7 +13,7 @@ class Endboss extends MovableObject {
     hadFirstContact = false;
     world;
     isAttacking = false;
-    speed = 5;
+    speed = 25;
 
     IMAGES_ALERT = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
