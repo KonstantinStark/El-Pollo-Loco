@@ -106,12 +106,14 @@ class Character extends MovableObject {
                 } else {
                     if (this.world.keyboard.D || this.world.keyboard.A) {
                         this.playAnimation(this.IMAGES_WALKING);
+                    } else {
+                        this.stopAnimation();
                     }
                 }
             } else if (this.isDead() && !isDeadAnimationPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
-        }, 40);
+        }, 180);
     }
     
 

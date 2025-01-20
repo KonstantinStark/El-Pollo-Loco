@@ -101,9 +101,11 @@ class World {
                         if (index > -1) {
                             this.level.enemies.splice(index, 1);
                         }
-                    }, 1000);
+                    }, 100);
                 } else {
                     this.character.hit();
+                    this.statusBarHealth.setPercentage(this.character.energy);
+                    !enemy.isDead()
                 }
             }
         });

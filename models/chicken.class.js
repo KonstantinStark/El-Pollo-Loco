@@ -45,9 +45,6 @@ class Chicken extends MovableObject {
     }
 
     die() {
-        this.isDead = true;
-        clearInterval(this.walkingInterval);
-        clearInterval(this.animationInterval);
         this.playAnimation(this.IMAGES_DEAD);
     }
 }

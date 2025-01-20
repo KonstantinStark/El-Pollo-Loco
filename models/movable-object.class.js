@@ -60,6 +60,10 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+    
+    stopAnimation() {
+        this.img = this.imageCache['./img/2_character_pepe/2_walk/W-21.png'];
+    }
 
     playRotationAnimation() {
         this.currentImageIndex = (this.currentImageIndex + 1) % this.IMAGES_ROTATE.length;
