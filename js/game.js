@@ -17,65 +17,52 @@ music_sound.pause();
 music_sound.volume = 0.1;
 music_sound.loop = true;
 
-
 function init() {
     document.getElementById("overlay").style.display = "flex";
     document.getElementById("startGameButton").addEventListener("click", startGame);
+    setupButtonListeners("leftButton", "A");
+    setupButtonListeners("rightButton", "D");
+    setupButtonListeners("throwButton", "E");
+    setupButtonListeners("upButton", "SPACE");
+    setupKeyboardListeners();
+    setupOrientationListener();
 }
 
-function init() {
-    document.getElementById("overlay").style.display = "flex";
-    document.getElementById("startGameButton").addEventListener("click", startGame);
-    document.getElementById("leftButton").addEventListener("mousedown", () => {
-        keyboard.A = true;
+function setupButtonListeners(buttonId, key) {
+    document.getElementById(buttonId).addEventListener("mousedown", () => {
+        keyboard[key] = true;
     });
-    document.getElementById("leftButton").addEventListener("mouseup", () => {
-        keyboard.A = false;
+    document.getElementById(buttonId).addEventListener("mouseup", () => {
+        keyboard[key] = false;
     });
-    document.getElementById("leftButton").addEventListener("touchstart", () => {
-        keyboard.A = true;
+    document.getElementById(buttonId).addEventListener("touchstart", () => {
+        keyboard[key] = true;
     });
-    document.getElementById("leftButton").addEventListener("touchend", () => {
-        keyboard.A = false;
+    document.getElementById(buttonId).addEventListener("touchend", () => {
+        keyboard[key] = false;
+    });
+}
+
+function setupOrientationListener() {
+    window.matchMedia("(orientation: portrait").addEventListener("change", e => {
+        const portrait = e.matches;
+        document.getElementById('rotateOverlay').style.display = portrait ? 'block' : 'none';
+    });
+}
+
+function setupKeyboardListeners() {
+    window.addEventListener('keypress', (event) => {
+        if (event.key === 'a') keyboard.A = true;
+        if (event.key === 'd') keyboard.D = true;
+        if (event.key === 'e') keyboard.E = true;
+        if (event.key === ' ') keyboard.SPACE = true;
     });
 
-    document.getElementById("rightButton").addEventListener("mousedown", () => {
-        keyboard.D = true;
-    });
-    document.getElementById("rightButton").addEventListener("mouseup", () => {
-        keyboard.D = false;
-    });
-    document.getElementById("rightButton").addEventListener("touchstart", () => {
-        keyboard.D = true;
-    });
-    document.getElementById("rightButton").addEventListener("touchend", () => {
-        keyboard.D = false;
-    });
-
-    document.getElementById("throwButton").addEventListener("mousedown", () => {
-        keyboard.E = true;
-    });
-    document.getElementById("throwButton").addEventListener("mouseup", () => {
-        keyboard.E = false;
-    });
-    document.getElementById("throwButton").addEventListener("touchstart", () => {
-        keyboard.E = true;
-    });
-    document.getElementById("throwButton").addEventListener("touchend", () => {
-        keyboard.E = false;
-    });
-
-    document.getElementById("upButton").addEventListener("mousedown", () => {
-        keyboard.SPACE = true;
-    });
-    document.getElementById("upButton").addEventListener("mouseup", () => {
-        keyboard.SPACE = false;
-    });
-    document.getElementById("upButton").addEventListener("touchstart", () => {
-        keyboard.SPACE = true;
-    });
-    document.getElementById("upButton").addEventListener("touchend", () => {
-        keyboard.SPACE = false;
+    window.addEventListener('keyup', (event) => {
+        if (event.key === 'a') keyboard.A = false;
+        if (event.key === 'd') keyboard.D = false;
+        if (event.key === 'e') keyboard.E = false;
+        if (event.key === ' ') keyboard.SPACE = false;
     });
 }
 
