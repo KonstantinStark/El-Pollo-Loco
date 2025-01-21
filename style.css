@@ -208,16 +208,16 @@ h2 {
     display: flex;   
 }
 
-.test {
+.movenment-left {
     position: absolute;
-    top: 87%;
+    top: 82%;
     z-index: 1;
     left: 1%;
 }
 
-.test2 {
+.movenment-right {
     position: absolute;
-    top: 87%;
+    top: 82%;
     z-index: 1;
     right: 1%;
 }
@@ -249,7 +249,7 @@ h2 {
         font-size: 40px;
     }
 }
-@media(max-width: 932px) {
+@media(max-width: 1180px) {
 .mute-button {
     position: absolute;
     top: 95%;

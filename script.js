@@ -10,6 +10,8 @@ function toggleMute() {
         pick_up_sound.muted = false;  
         coin_sound.muted = false; 
         scream_sound.muted = false; 
+        chicken_sound.muted = false; 
+        chicken2_sound.muted = false; 
         muteIcon.src = "./img/10_icons/on.svg";
     } else {
         music_sound.muted = true;
@@ -19,7 +21,9 @@ function toggleMute() {
         throw_sound.muted = true;
         pick_up_sound.muted = true; 
         coin_sound.muted = true; 
-        scream_sound.muted = true; 
+        scream_sound.muted = true;
+        chicken_sound.muted = true; 
+        chicken2_sound.muted = true; 
         muteIcon.src = "./img/10_icons/mute.svg";
     }
 }

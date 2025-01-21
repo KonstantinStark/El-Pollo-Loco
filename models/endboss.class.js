@@ -96,9 +96,22 @@ class Endboss extends MovableObject {
     }
 
     showWinScreen() {
+        this.pauseAndPlayMusic();
+        const gameWinImage = this.createWinImage();
+        const tryAgainButton = this.createTryAgainButton();
+    
+        document.body.appendChild(gameWinImage);
+        document.body.appendChild(tryAgainButton);
+    
+        this.setupTryAgainButtonEvents(tryAgainButton, gameWinImage);
+    }
+    
+    pauseAndPlayMusic() {
         music_sound.pause();
         win_sound.play();
-
+    }
+    
+    createWinImage() {
         let gameWinImage = document.createElement("img");
         gameWinImage.src = "./img/9_intro_outro_screens/win/win_2.png";
         gameWinImage.style.position = "fixed";
@@ -108,8 +121,10 @@ class Endboss extends MovableObject {
         gameWinImage.style.height = "30%";
         gameWinImage.style.objectFit = "contain";
         gameWinImage.style.zIndex = "100";
-        document.body.appendChild(gameWinImage);
-
+        return gameWinImage;
+    }
+    
+    createTryAgainButton() {
         let tryAgainButton = document.createElement("button");
         tryAgainButton.innerHTML = "Try Again";
         tryAgainButton.style.fontFamily = "'MexicanTequila'";
@@ -126,26 +141,29 @@ class Endboss extends MovableObject {
         tryAgainButton.style.backgroundColor = "#ffcd00";
         tryAgainButton.style.transition = "all 0.3s ease";
         tryAgainButton.style.zIndex = "101";
-        document.body.appendChild(tryAgainButton);
-
+        return tryAgainButton;
+    }
+    
+    setupTryAgainButtonEvents(tryAgainButton, gameWinImage) {
         tryAgainButton.addEventListener("mouseover", () => {
             tryAgainButton.style.backgroundColor = "#a0220a";
             tryAgainButton.style.color = "#fff";
             tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
             tryAgainButton.style.transform = "scale(1.1)";
         });
-
+    
         tryAgainButton.addEventListener("mouseout", () => {
             tryAgainButton.style.backgroundColor = "#ffcd00";
             tryAgainButton.style.color = "#a0220a";
             tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
             tryAgainButton.style.transform = "scale(1)";
         });
-
+    
         tryAgainButton.addEventListener("click", () => {
             this.resetGame();
             document.body.removeChild(gameWinImage);
             document.body.removeChild(tryAgainButton);
         });
     }
+    
 }
