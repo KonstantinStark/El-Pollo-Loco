@@ -56,7 +56,7 @@ class Character extends MovableObject {
         this.animate();
     }
 
-    animate() {
+    animate() { 
         let isDeadAnimationPlayed = false;
         let animationInterval = setInterval(() => {
             walking_sound.pause();

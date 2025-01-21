@@ -83,19 +83,6 @@ class Endboss extends MovableObject {
         }, 150);
     }
 
-    resetGame() {
-        this.character = new Character();
-        this.level = level1;
-        this.camera_x = 0;
-        this.statusBarHealth = new StatusBarHealth();
-        this.statusBarCoin = new StatusBarCoin();
-        this.statusBarBottle = new StatusBarBottle();
-        this.statusBarHealthEndboss = new StatusBarHealthEndboss();
-        this.throwableObjects = [];
-        this.throwCooldown = false;
-        this.setWorld();
-    }
-
     showWinScreen() {
         this.pauseAndPlayMusic();
         const gameWinImage = this.createWinImage();
@@ -161,7 +148,7 @@ class Endboss extends MovableObject {
         });
     
         tryAgainButton.addEventListener("click", () => {
-            this.resetGame();
+            this.world.reset();
             document.body.removeChild(gameWinImage);
             document.body.removeChild(tryAgainButton);
         });

@@ -109,7 +109,6 @@ class World {
                 } else {
                     this.character.hit();
                     this.statusBarHealth.setPercentage(this.character.energy);
-                    !enemy.isDead()
                 }
             }
         });
@@ -204,6 +203,7 @@ class World {
 
     reset() {
         this.character = new Character();
+        initLevel();
         this.level = level1;
         this.camera_x = 0;
         this.statusBarHealth = new StatusBarHealth();
