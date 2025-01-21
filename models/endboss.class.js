@@ -48,6 +48,7 @@ class Endboss extends MovableObject {
 
     constructor(world) {
         super().loadImage(this.IMAGES_ALERT[0]);
+        this.world = world;
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
@@ -75,7 +76,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             }
             i++;
-            if (this.world.character.x > 3400 && !this.hadFirstContact) {
+            if (this.world && this.world.character && this.world.character.x > 3400 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
             }

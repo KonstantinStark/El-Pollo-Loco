@@ -17,6 +17,9 @@ music_sound.pause();
 music_sound.volume = 0.1;
 music_sound.loop = true;
 
+/**
+ * Initializes the game. Sets up event listeners for buttons and the keyboard.
+ */
 function init() {
     document.getElementById("overlay").style.display = "flex";
     document.getElementById("startGameButton").addEventListener("click", startGame);
@@ -28,6 +31,12 @@ function init() {
     setupOrientationListener();
 }
 
+/**
+ * Adds event listeners to buttons to simulate keyboard inputs.
+ * 
+ * @param {string} buttonId - The ID of the button.
+ * @param {string} key - The key associated with the button.
+ */
 function setupButtonListeners(buttonId, key) {
     document.getElementById(buttonId).addEventListener("mousedown", () => {
         keyboard[key] = true;
@@ -43,6 +52,10 @@ function setupButtonListeners(buttonId, key) {
     });
 }
 
+/**
+ * Sets up a listener for changes in screen orientation.
+ * Displays an overlay asking the user to rotate the device in portrait mode.
+ */
 function setupOrientationListener() {
     window.matchMedia("(orientation: portrait").addEventListener("change", e => {
         const portrait = e.matches;
@@ -50,6 +63,10 @@ function setupOrientationListener() {
     });
 }
 
+/**
+ * Adds event listeners for keyboard inputs.
+ * Responds to keypress and keyup events.
+ */
 function setupKeyboardListeners() {
     window.addEventListener('keypress', (event) => {
         if (event.key === 'a') keyboard.A = true;
@@ -66,6 +83,10 @@ function setupKeyboardListeners() {
     });
 }
 
+/**
+ * Starts the game. Hides the overlay and shows the canvas.
+ * Initializes the level and the World object.
+ */
 function startGame() {
     music_sound.play();
     document.getElementById("overlay").style.display = "none";

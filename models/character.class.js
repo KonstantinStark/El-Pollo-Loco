@@ -57,24 +57,24 @@ class Character extends MovableObject {
     }
 
     animate() {
-        this.handleMovement();
-        this.handleAnimation();
-    }
-
-    handleMovement() {
         let isDeadAnimationPlayed = false;
         let animationInterval = setInterval(() => {
             walking_sound.pause();
+                
             if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                     this.moveRight();
                     this.otherDirection = false;
-                    if (!this.isAboveGround()) walking_sound.play();
+                    if (!this.isAboveGround()) {
+                        walking_sound.play();
+                    }
                 }
                 if (this.world.keyboard.A && this.x > 0) {
                     this.moveLeft();
                     this.otherDirection = true;
-                    if (!this.isAboveGround()) walking_sound.play();
+                    if (!this.isAboveGround()) {
+                        walking_sound.play();
+                    }
                 }
                 if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                     this.jump();
@@ -82,17 +82,21 @@ class Character extends MovableObject {
                 this.world.camera_x = -this.x + 100;
             }
             if (this.isDead() && !isDeadAnimationPlayed) {
-                this.playDeathAnimation();
                 isDeadAnimationPlayed = true;
+                scream_sound.play();
+                this.playAnimation(this.IMAGES_DEAD);
+                const animationDuration = this.IMAGES_DEAD.length * 170;
+                setTimeout(() => {
+                    this.world.showGameOverScreen();
+                    this.img = null;
+                }, animationDuration);
             }
             if (this.world.level.endboss[0].bossEnergy === 0) {
                 this.img = null;
-                clearInterval(animationInterval);
-            }
+                clearInterval(animationInterval)
+            };
         }, 1000 / 60);
-    }
 
-    handleAnimation() {
         setInterval(() => {
             if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.isHurt()) {
@@ -106,9 +110,12 @@ class Character extends MovableObject {
                         this.stopAnimation();
                     }
                 }
+            } else if (this.isDead() && !isDeadAnimationPlayed) {
+                this.playAnimation(this.IMAGES_DEAD);
             }
         }, 180);
     }
+    
 
     isEndbossDead() {
         return this.world.level.endboss[0].bossEnergy == 0
