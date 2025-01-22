@@ -34,15 +34,14 @@ class ThrowableObject extends MovableObject {
     * The object moves horizontally and plays the rotation animation until it hits an enemy.
     * Once the object hits an enemy, the splash animation is played.
     */
-    throw() {
+    throw() 
+    {
         throw_sound.play();
         this.speedY = 21;
         this.applyGravity();
-
         setInterval(() => {
             this.x += 10;
         }, 25);
-
         let animationInterval = setInterval(() => {
             this.playRotationAnimation();
             if (this.hasHitEnemy) {

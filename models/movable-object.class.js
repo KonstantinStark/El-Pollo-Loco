@@ -96,13 +96,6 @@ class MovableObject extends DrawableObject {
     }
 
     /**
-     * Stops the animation and sets the image to a default image.
-     */
-    stopAnimation() {
-        this.img = this.imageCache['./img/2_character_pepe/2_walk/W-21.png'];
-    }
-
-    /**
      * Plays a rotation animation by cycling through the rotation images.
      */
     playRotationAnimation() {

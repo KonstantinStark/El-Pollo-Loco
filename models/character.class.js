@@ -42,8 +42,20 @@ class Character extends MovableObject {
         './img/2_character_pepe/5_dead/D-56.png',
         './img/2_character_pepe/5_dead/D-57.png'
     ];
+    IMAGES_IDLE = [
+        './img/2_character_pepe/1_idle/idle/I-1.png',
+        './img/2_character_pepe/1_idle/idle/I-2.png',
+        './img/2_character_pepe/1_idle/idle/I-4.png',
+        './img/2_character_pepe/1_idle/idle/I-5.png',
+        './img/2_character_pepe/1_idle/idle/I-6.png',
+        './img/2_character_pepe/1_idle/idle/I-7.png',
+        './img/2_character_pepe/1_idle/idle/I-8.png',
+        './img/2_character_pepe/1_idle/idle/I-9.png',
+        './img/2_character_pepe/1_idle/idle/I-10.png'
+    ];
 
     world;
+    isDeadAnimationPlayed = false;
 
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png')
@@ -52,54 +64,74 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_IDLE);
         this.applyGravity();
         this.animate();
     }
 
     /**
      * Animates the character, handling movement, jumping, and death sequences.
+     * Continuously updates the character's animation state.
      */
     animate() {
-        let isDeadAnimationPlayed = false;
         let animationInterval = setInterval(() => {
             walking_sound.pause();
-
             if (!this.isDead() && !this.isEndbossDead()) {
-                if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
-                    this.moveRight();
-                    this.otherDirection = false;
-                    if (!this.isAboveGround()) {
-                        walking_sound.play();
-                    }
-                }
-                if (this.world.keyboard.A && this.x > 0) {
-                    this.moveLeft();
-                    this.otherDirection = true;
-                    if (!this.isAboveGround()) {
-                        walking_sound.play();
-                    }
-                }
-                if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    this.jump();
-                }
-                this.world.camera_x = -this.x + 100;
+                this.movement();
             }
-            if (this.isDead() && !isDeadAnimationPlayed) {
-                isDeadAnimationPlayed = true;
-                scream_sound.play();
-                this.playAnimation(this.IMAGES_DEAD);
-                const animationDuration = this.IMAGES_DEAD.length * 170;
-                setTimeout(() => {
-                    this.world.showGameOverScreen();
-                    this.img = null;
-                }, animationDuration);
+            if (this.isDead() && !this.isDeadAnimationPlayed) {
+               this.isDeadAnimation();
             }
             if (this.world.level.endboss[0].bossEnergy === 0) {
                 this.img = null;
                 clearInterval(animationInterval)
             };
         }, 1000 / 60);
+        this.animationInterval();
+    }
 
+    /**
+     * Handles the character's movement based on user input.
+     */
+    movement() {
+        if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            if (!this.isAboveGround()) {
+                walking_sound.play();
+            }
+        }
+        if (this.world.keyboard.A && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true;
+            if (!this.isAboveGround()) {
+                walking_sound.play();
+            }
+        }
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+        }
+        this.world.camera_x = -this.x + 100;
+    }
+
+    /**
+     * Plays the death animation and triggers the game over screen when finished.
+     */
+    isDeadAnimation () {
+        this.isDeadAnimationPlayed = true; // Update the property
+        scream_sound.play();
+        this.playAnimation(this.IMAGES_DEAD);
+        const animationDuration = this.IMAGES_DEAD.length * 170;
+        setTimeout(() => {
+            this.world.showGameOverScreen();
+            this.img = null;
+        }, animationDuration);
+    }
+
+    /**
+     * Manages the animation interval for different states such as walking, jumping, and idle.
+     */
+    animationInterval () {
         setInterval(() => {
             if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.isHurt()) {
@@ -110,15 +142,14 @@ class Character extends MovableObject {
                     if (this.world.keyboard.D || this.world.keyboard.A) {
                         this.playAnimation(this.IMAGES_WALKING);
                     } else {
-                        this.stopAnimation();
+                        this.playAnimation(this.IMAGES_IDLE);
                     }
                 }
-            } else if (this.isDead() && !isDeadAnimationPlayed) {
+            } else if (this.isDead() && !this.isDeadAnimationPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 150);
     }
-
 
     /**
      * Checks if the end boss is dead.
