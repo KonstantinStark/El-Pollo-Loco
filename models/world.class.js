@@ -16,7 +16,6 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.level.endboss.world = new Endboss();
         this.draw();
         this.setWorld();
         this.run();
@@ -24,7 +23,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.level.endboss.world = this;
+        this.level.endboss[0].world = this;
     }
 
     run() {
@@ -204,8 +203,9 @@ class World {
         this.ctx.restore();
     }
 
-    reset() {
+    resetGame() {
         this.character = new Character();
+        initLevel();
         this.level = level1;
         this.camera_x = 0;
         this.statusBarHealth = new StatusBarHealth();
@@ -217,56 +217,79 @@ class World {
         this.setWorld();
     }
 
+    showEndScreen(isWin) {
+        let sound = isWin ? win_sound : loose_sound;
+        let imageSrc = isWin 
+            ? "./img/9_intro_outro_screens/win/win_2.png" 
+            : "./img/9_intro_outro_screens/game_over/game over2.png";
+
+        sound.play();
+
+        let endScreenImage = document.createElement("img");
+        endScreenImage.src = imageSrc;
+        this.styleElement(endScreenImage, {
+            position: "fixed",
+            top: "45%",
+            left: "50%",
+            width: "30%",
+            height: "30%",
+            objectFit: "contain",
+            zIndex: "100",
+            transform: "translate(-50%, -50%)",
+        });
+        document.body.appendChild(endScreenImage);
+
+        let button = this.createButton("Try Again", () => {
+            this.resetGame();
+            endScreenImage.remove();
+            button.remove();
+        });
+        document.body.appendChild(button);
+    }
+
+    createButton(label, onClick) {
+        let button = document.createElement("button");
+        button.innerHTML = label;
+        this.styleElement(button, {
+            position: "absolute",
+            bottom: "65px",
+            padding: "10px 20px",
+            fontSize: "50px",
+            cursor: "pointer",
+            border: "solid 2px black",
+            borderRadius: "5px",
+            color: "#a0220a",
+            boxShadow: "10px 10px 15px rgba(0, 0, 0, 0.5)",
+            backgroundColor: "#ffcd00",
+            fontFamily: "'MexicanTequila'",
+            zIndex: "101",
+            transition: "all 0.3s ease",
+        });
+        button.addEventListener("mouseover", () => {
+            button.style.backgroundColor = "#a0220a";
+            button.style.color = "#fff";
+            button.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
+            button.style.transform = "scale(1.1)";
+        });
+        button.addEventListener("mouseout", () => {
+            button.style.backgroundColor = "#ffcd00";
+            button.style.color = "#a0220a";
+            button.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+            button.style.transform = "scale(1)";
+        });
+        button.addEventListener("click", onClick);
+        return button;
+    }
+
+    styleElement(element, styles) {
+        Object.assign(element.style, styles);
+    }
+
     showGameOverScreen() {
-        loose_sound.play();
+        this.showEndScreen(false);
+    }
 
-        let gameOverImage = document.createElement("img");
-        gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
-        gameOverImage.style.position = "fixed";
-        gameOverImage.style.top = "30%";
-        gameOverImage.style.left = "50";
-        gameOverImage.style.width = "30%";
-        gameOverImage.style.height = "30%";
-        gameOverImage.style.objectFit = "contain";
-        gameOverImage.style.zIndex = "100";
-        document.body.appendChild(gameOverImage);
-
-        let tryAgainButton = document.createElement("button1");
-        tryAgainButton.innerHTML = "Try Again";
-        tryAgainButton.style.fontFamily = "'MexicanTequila'";
-        tryAgainButton.style.position = "absolute";
-        tryAgainButton.style.bottom = "65px";
-        tryAgainButton.style.padding = "5px 10px";
-        tryAgainButton.style.paddingTop = "10px";
-        tryAgainButton.style.fontSize = "50px";
-        tryAgainButton.style.cursor = "pointer";
-        tryAgainButton.style.border = "solid 2px black";
-        tryAgainButton.style.borderRadius = "5px";
-        tryAgainButton.style.color = "#a0220a";
-        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
-        tryAgainButton.style.backgroundColor = "#ffcd00";
-        tryAgainButton.style.transition = "all 0.3s ease";
-        tryAgainButton.style.zIndex = "101";
-        document.body.appendChild(tryAgainButton);
-
-        tryAgainButton.addEventListener("mouseover", () => {
-            tryAgainButton.style.backgroundColor = "#a0220a";
-            tryAgainButton.style.color = "#fff";
-            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
-            tryAgainButton.style.transform = "scale(1.1)";
-        });
-
-        tryAgainButton.addEventListener("mouseout", () => {
-            tryAgainButton.style.backgroundColor = "#ffcd00";
-            tryAgainButton.style.color = "#a0220a";
-            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
-            tryAgainButton.style.transform = "scale(1)";
-        });
-
-        tryAgainButton.addEventListener("click", () => {
-            this.reset();
-            document.body.removeChild(gameOverImage);
-            document.body.removeChild(tryAgainButton);
-        });
+    showWinScreen() {
+        this.showEndScreen(true);
     }
 }
