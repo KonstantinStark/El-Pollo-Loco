@@ -48,7 +48,6 @@ class Endboss extends MovableObject {
 
     constructor(world) {
         super().loadImage(this.IMAGES_ALERT[0]);
-        this.world = world;
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
@@ -148,7 +147,7 @@ class Endboss extends MovableObject {
         });
     
         tryAgainButton.addEventListener("click", () => {
-            this.world.reset();
+            this.world.resetGame();
             document.body.removeChild(gameWinImage);
             document.body.removeChild(tryAgainButton);
         });

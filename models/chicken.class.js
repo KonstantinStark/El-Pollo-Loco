@@ -47,8 +47,4 @@ class Chicken extends MovableObject {
     die() {
         this.playAnimation(this.IMAGES_DEAD);
     }
-
-    isDead() {
-        return this.energy <= 0;
-    }
 }

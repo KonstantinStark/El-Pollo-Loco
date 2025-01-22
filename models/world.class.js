@@ -16,7 +16,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.endboss = new Endboss(this);
+        this.level.endboss.world = new Endboss();
         this.draw();
         this.setWorld();
         this.run();
@@ -39,9 +39,6 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.level.endboss[0].bossEnergy <= 0) {
-            return;
-        }
         if (this.keyboard.E && !ePressed && this.statusBarBottle.percentage >= 20 && !this.throwCooldown) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
@@ -105,7 +102,7 @@ class World {
                         if (index > -1) {
                             this.level.enemies.splice(index, 1);
                         }
-                    });
+                    }, 100);
                 } else {
                     this.character.hit();
                     this.statusBarHealth.setPercentage(this.character.energy);
@@ -145,24 +142,30 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.level.clouds);
+
         if (this.character.x >= this.level.endboss[0].x - 800) {
             this.addToMap(this.statusBarHealthEndboss);
         }
+
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
+
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
+
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects)
         this.ctx.translate(-this.camera_x, 0);
+
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -203,7 +206,6 @@ class World {
 
     reset() {
         this.character = new Character();
-        initLevel();
         this.level = level1;
         this.camera_x = 0;
         this.statusBarHealth = new StatusBarHealth();
@@ -217,73 +219,54 @@ class World {
 
     showGameOverScreen() {
         loose_sound.play();
-        const gameOverImage = this.createGameOverImage();
-        const tryAgainButton = this.createTryAgainButton();
-    
-        tryAgainButton.addEventListener("mouseover", () => this.styleButtonHover(tryAgainButton));
-        tryAgainButton.addEventListener("mouseout", () => this.styleButtonDefault(tryAgainButton));
-        tryAgainButton.addEventListener("click", () => this.resetGame(gameOverImage, tryAgainButton));
-    }
-    
-    createGameOverImage() {
+
         let gameOverImage = document.createElement("img");
         gameOverImage.src = "./img/9_intro_outro_screens/game_over/game over2.png";
-        Object.assign(gameOverImage.style, {
-            position: "fixed",
-            top: "30%",
-            left: "35%",
-            width: "30%",
-            height: "30%",
-            objectFit: "contain",
-            zIndex: "100",
-        });
+        gameOverImage.style.position = "fixed";
+        gameOverImage.style.top = "30%";
+        gameOverImage.style.left = "50";
+        gameOverImage.style.width = "30%";
+        gameOverImage.style.height = "30%";
+        gameOverImage.style.objectFit = "contain";
+        gameOverImage.style.zIndex = "100";
         document.body.appendChild(gameOverImage);
-        return gameOverImage;
-    }
-    
-    createTryAgainButton() {
-        let tryAgainButton = document.createElement("button");
+
+        let tryAgainButton = document.createElement("button1");
         tryAgainButton.innerHTML = "Try Again";
-        Object.assign(tryAgainButton.style, {
-            fontFamily: "'MexicanTequila'",
-            position: "absolute",
-            bottom: "65px",
-            padding: "10px 20px",
-            fontSize: "50px",
-            cursor: "pointer",
-            border: "solid 2px black",
-            borderRadius: "5px",
-            color: "#a0220a",
-            boxShadow: "10px 10px 15px rgba(0, 0, 0, 0.5)",
-            backgroundColor: "#ffcd00",
-            transition: "all 0.3s ease",
-            zIndex: "101",
-        });
+        tryAgainButton.style.fontFamily = "'MexicanTequila'";
+        tryAgainButton.style.position = "absolute";
+        tryAgainButton.style.bottom = "65px";
+        tryAgainButton.style.padding = "5px 10px";
+        tryAgainButton.style.paddingTop = "10px";
+        tryAgainButton.style.fontSize = "50px";
+        tryAgainButton.style.cursor = "pointer";
+        tryAgainButton.style.border = "solid 2px black";
+        tryAgainButton.style.borderRadius = "5px";
+        tryAgainButton.style.color = "#a0220a";
+        tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+        tryAgainButton.style.backgroundColor = "#ffcd00";
+        tryAgainButton.style.transition = "all 0.3s ease";
+        tryAgainButton.style.zIndex = "101";
         document.body.appendChild(tryAgainButton);
-        return tryAgainButton;
-    }
-    
-    styleButtonHover(button) {
-        Object.assign(button.style, {
-            backgroundColor: "#a0220a",
-            color: "#fff",
-            boxShadow: "0px 0px 20px rgba(160, 34, 10, 0.7)",
-            transform: "scale(1.1)",
+
+        tryAgainButton.addEventListener("mouseover", () => {
+            tryAgainButton.style.backgroundColor = "#a0220a";
+            tryAgainButton.style.color = "#fff";
+            tryAgainButton.style.boxShadow = "0px 0px 20px rgba(160, 34, 10, 0.7)";
+            tryAgainButton.style.transform = "scale(1.1)";
+        });
+
+        tryAgainButton.addEventListener("mouseout", () => {
+            tryAgainButton.style.backgroundColor = "#ffcd00";
+            tryAgainButton.style.color = "#a0220a";
+            tryAgainButton.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
+            tryAgainButton.style.transform = "scale(1)";
+        });
+
+        tryAgainButton.addEventListener("click", () => {
+            this.reset();
+            document.body.removeChild(gameOverImage);
+            document.body.removeChild(tryAgainButton);
         });
     }
-    
-    styleButtonDefault(button) {
-        Object.assign(button.style, {
-            backgroundColor: "#ffcd00",
-            color: "#a0220a",
-            boxShadow: "10px 10px 15px rgba(0, 0, 0, 0.5)",
-            transform: "scale(1)",
-        });
-    }
-    
-    resetGame(gameOverImage, tryAgainButton) {
-        this.reset();
-        document.body.removeChild(gameOverImage);
-        document.body.removeChild(tryAgainButton);
-    }    
 }
