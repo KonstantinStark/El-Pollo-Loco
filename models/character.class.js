@@ -56,11 +56,14 @@ class Character extends MovableObject {
         this.animate();
     }
 
-    animate() { 
+    /**
+     * Animates the character, handling movement, jumping, and death sequences.
+     */
+    animate() {
         let isDeadAnimationPlayed = false;
         let animationInterval = setInterval(() => {
             walking_sound.pause();
-                
+
             if (!this.isDead() && !this.isEndbossDead()) {
                 if (this.world.keyboard.D && this.x < this.world.level.level_end_x) {
                     this.moveRight();
@@ -115,12 +118,19 @@ class Character extends MovableObject {
             }
         }, 150);
     }
-    
 
+
+    /**
+     * Checks if the end boss is dead.
+     * @returns {boolean} True if the end boss has no energy left, otherwise false.
+     */
     isEndbossDead() {
-        return this.world.level.endboss[0].bossEnergy == 0
+        return this.world.level.endboss[0].bossEnergy == 0;
     }
 
+    /**
+     * Makes the character jump by setting the vertical speed.
+     */
     jump() {
         jump_sound.play();
         this.speedY = 20;

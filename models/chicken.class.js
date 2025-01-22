@@ -30,6 +30,10 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Starts the animation of the chicken.
+     * Handles movement and sprite animation.
+     */
     animate() {
         this.walkingInterval = setInterval(() => {
             if (!this.isDead) {
@@ -44,6 +48,10 @@ class Chicken extends MovableObject {
         }, 75);
     }
 
+    /**
+     * Triggers the death animation of the chicken.
+     * Changes the sprite to the dead image.
+     */
     die() {
         this.playAnimation(this.IMAGES_DEAD);
     }

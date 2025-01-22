@@ -28,7 +28,12 @@ class ThrowableObject extends MovableObject {
         this.img = this.imageCache[this.IMAGES_ROTATE[0]];
         this.throw();
     }
-    
+
+    /**
+    * Throws the object by setting its velocity and applying gravity.
+    * The object moves horizontally and plays the rotation animation until it hits an enemy.
+    * Once the object hits an enemy, the splash animation is played.
+    */
     throw() {
         throw_sound.play();
         this.speedY = 21;
@@ -40,7 +45,7 @@ class ThrowableObject extends MovableObject {
 
         let animationInterval = setInterval(() => {
             this.playRotationAnimation();
-            if (this.hasHitEnemy) {                
+            if (this.hasHitEnemy) {
                 this.playAnimation(this.IMAGES_SPLASH);
                 setTimeout(() => {
                     this.energy = 0;

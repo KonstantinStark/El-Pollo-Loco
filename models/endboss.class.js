@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
         left: 4,
         right: 9,
     };
-    
+
     hadFirstContact = false;
     world;
     isAttacking = false;
@@ -54,6 +54,11 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * Animates the Endboss by playing different animations based on its state.
+     * Handles movement, attack, and death sequences.
+     */
     animate() {
         let i = 0;
         let animationInterval = setInterval(() => {

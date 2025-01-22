@@ -7,7 +7,7 @@ class Bottle extends MovableObject {
         bottom: 5,
         left: 40,
         right: 9,
-      };
+    };
     IMAGES_GROUND = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         './img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
@@ -37,6 +37,10 @@ class Bottle extends MovableObject {
         this.x = 500 + Math.random() * 3000;
     }
 
+    /**
+       * Loads an array of images by creating an Image object for each path.
+       * @param {Array<string>} array - The array of image paths to load.
+       */
     loadImages(array) {
         array.forEach((path) => {
             const img = new Image();

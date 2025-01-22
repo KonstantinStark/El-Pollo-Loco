@@ -30,6 +30,10 @@ class SmallChicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Starts the walking and animation intervals for the small chicken.
+     * The chicken moves left and plays the walking animation unless it is dead.
+     */
     animate() {
         this.walkingInterval = setInterval(() => {
             if (!this.isDead) {
@@ -44,6 +48,10 @@ class SmallChicken extends MovableObject {
         }, 75);
     }
 
+    /**
+     * Handles the death of the small chicken.
+     * Stops the walking and animation intervals and plays the death animation.
+     */
     die() {
         this.isDead = true;
         clearInterval(this.walkingInterval);
