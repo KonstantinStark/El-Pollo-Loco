@@ -275,9 +275,9 @@ class World {
         let imageSrc = isWin
             ? "./img/9_intro_outro_screens/win/win_2.png"
             : "./img/9_intro_outro_screens/game_over/game over2.png";
-    
+
         sound.play();
-    
+
         this.endScreenImage = document.createElement("img");
         this.endScreenImage.src = imageSrc;
         this.styleElement(this.endScreenImage, {
@@ -291,7 +291,7 @@ class World {
             transform: "translate(-50%, -50%)",
         });
         document.body.appendChild(this.endScreenImage);
-    
+
         this.tryAgainButton = this.createButton("Try Again", () => {
             this.resetGame();
             document.body.removeChild(this.endScreenImage);
@@ -324,6 +324,15 @@ class World {
             zIndex: "101",
             transition: "all 0.3s ease",
         });
+        this.buttonMouseOver(button);
+        button.addEventListener("click", onClick);
+        return button;
+    }
+
+    /**
+    * Adds mouseover and mouseout event listeners to the button for hover effects.
+    */
+    buttonMouseOver(button) {
         button.addEventListener("mouseover", () => {
             button.style.backgroundColor = "#a0220a";
             button.style.color = "#fff";
@@ -336,8 +345,6 @@ class World {
             button.style.boxShadow = "10px 10px 15px rgba(0, 0, 0, 0.5)";
             button.style.transform = "scale(1)";
         });
-        button.addEventListener("click", onClick);
-        return button;
     }
 
     /**
