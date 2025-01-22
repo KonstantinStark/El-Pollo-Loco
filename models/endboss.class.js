@@ -65,8 +65,10 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 const animationDuration = this.IMAGES_DEAD.length * 250;
                 setTimeout(() => {
-                    this.world.showWinScreen();
-                    this.img = null;
+                    if (!this.winScreenShown) {
+                        this.world.showWinScreen();
+                        this.winScreenShown = true;
+                    }
                     clearInterval(animationInterval);
                 }, animationDuration);
             } else if (this.isAttacking) {
