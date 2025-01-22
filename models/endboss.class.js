@@ -14,6 +14,7 @@ class Endboss extends MovableObject {
     world;
     isAttacking = false;
     speed = 25;
+    animationInterval;
 
     IMAGES_ALERT = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -62,15 +63,7 @@ class Endboss extends MovableObject {
         let i = 0;
         let animationInterval = setInterval(() => {
             if (this.bossIsDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                const animationDuration = this.IMAGES_DEAD.length * 250;
-                setTimeout(() => {
-                    if (!this.winScreenShown) {
-                        this.world.showWinScreen();
-                        this.winScreenShown = true;
-                    }
-                    clearInterval(animationInterval);
-                }, animationDuration);
+                this.isBossDead();
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
                 this.moveLeft();
@@ -81,10 +74,32 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             }
             i++;
-            if (this.world && this.world.character && this.world.character.x > 3400 && !this.hadFirstContact) {
-                i = 0;
-                this.hadFirstContact = true;
-            }
+            this.hadFirstContactWithCharacter();
         }, 150);
+    }
+
+    /**
+     * Handles the Endboss' death animation and triggers the win screen after the animation ends.
+     */
+    isBossDead() {
+        this.playAnimation(this.IMAGES_DEAD);
+        const animationDuration = this.IMAGES_DEAD.length * 250;
+        setTimeout(() => {
+            if (!this.winScreenShown) {
+                this.world.showWinScreen();
+                this.winScreenShown = true;
+            }
+            clearInterval(this.animationInterval);
+        }, animationDuration);
+    }
+
+    /**
+     * Checks if the Endboss had first contact with the character and updates the state accordingly.
+     */
+    hadFirstContactWithCharacter() {
+        if (this.world && this.world.character && this.world.character.x > 3400 && !this.hadFirstContact) {
+            i = 0;
+            this.hadFirstContact = true;
+        }
     }
 }
