@@ -249,7 +249,7 @@ h2 {
         font-size: 40px;
     }
 }
-@media(max-width: 1368px) {
+@media(max-width: 1369px) {
 .mute-button {
     position: absolute;
     top: 95%;

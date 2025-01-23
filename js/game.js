@@ -38,17 +38,21 @@ function init() {
  * @param {string} key - The key associated with the button.
  */
 function setupButtonListeners(buttonId, key) {
-    document.getElementById(buttonId).addEventListener("mousedown", () => {
+    const button = document.getElementById(buttonId);
+    button.addEventListener("mousedown", () => {
         keyboard[key] = true;
     });
-    document.getElementById(buttonId).addEventListener("mouseup", () => {
+    button.addEventListener("mouseup", () => {
         keyboard[key] = false;
     });
-    document.getElementById(buttonId).addEventListener("touchstart", () => {
+    button.addEventListener("touchstart", () => {
         keyboard[key] = true;
     });
-    document.getElementById(buttonId).addEventListener("touchend", () => {
+    button.addEventListener("touchend", () => {
         keyboard[key] = false;
+    });
+    button.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
     });
 }
 
@@ -57,9 +61,13 @@ function setupButtonListeners(buttonId, key) {
  * Displays an overlay asking the user to rotate the device in portrait mode.
  */
 function setupOrientationListener() {
-    window.matchMedia("(orientation: portrait").addEventListener("change", e => {
-        const portrait = e.matches;
+    const checkOrientation = () => {
+        const portrait = window.matchMedia("(orientation: portrait)").matches;
         document.getElementById('rotateOverlay').style.display = portrait ? 'block' : 'none';
+    };
+    checkOrientation();
+    window.matchMedia("(orientation: portrait)").addEventListener("change", e => {
+        checkOrientation();
     });
 }
 

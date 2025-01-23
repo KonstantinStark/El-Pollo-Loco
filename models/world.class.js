@@ -311,9 +311,9 @@ class World {
         button.innerHTML = label;
         this.styleElement(button, {
             position: "absolute",
-            bottom: "65px",
+            bottom: "35px",
             padding: "10px 20px",
-            fontSize: "50px",
+            fontSize: "24px",
             cursor: "pointer",
             border: "solid 2px black",
             borderRadius: "5px",
